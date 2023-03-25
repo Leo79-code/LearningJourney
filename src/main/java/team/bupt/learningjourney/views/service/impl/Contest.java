@@ -19,7 +19,7 @@ public class Contest implements IPageService {
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
         Label test = new Label("Awards");
-        StyleUtil.setFont(test, Color.BLACK, 20);
+        StyleUtil.setFont(test, Color.RED, 30);
         vbox.getChildren().add(test);
         return vbox;
     }
