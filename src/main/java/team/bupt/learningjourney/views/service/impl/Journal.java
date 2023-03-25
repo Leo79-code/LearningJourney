@@ -51,7 +51,7 @@ public class Journal implements IPageService {
         text3.setFont(Font.font("Verdana", FontWeight.BOLD, 40));
         VBox vBox2 = new VBox(20);
         vBox2.setMinSize(10,10);
-        Image image = new Image("file:src/data/journey.jpg");
+        Image image = new Image("file:src/resources/journey.jpg");
         ImageView imageView = new ImageView(image);
         vBox2.setAlignment(Pos.CENTER);
         vBox2.getChildren().addAll(text3,imageView);
