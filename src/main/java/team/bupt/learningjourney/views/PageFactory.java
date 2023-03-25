@@ -20,8 +20,8 @@ public class PageFactory {
             case "Contest":
                 pageService = new Contest();
                 break;
-            case "Portfolios":
-                pageService = new Portfolios();
+            case "Log":
+                pageService = new Log();
                 break;
             default:
                 pageService = new Timetable();

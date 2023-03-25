@@ -74,7 +74,7 @@ public class RunApplication extends Application {
     private List<Button> getLeftMenuItemList(double width) {
         double buttonHeight = 65;
         List<Button> buttonList = new ArrayList<>(5);
-        String[] itemNames = {"Timetable", "Courses", "School Report", "Contest", "Portfolios"};
+        String[] itemNames = {"Timetable", "Courses", "School Report", "Contest", "Log"};
         for (String name : itemNames) {
             Button button = new Button(name);
             button.setMinWidth(width);
