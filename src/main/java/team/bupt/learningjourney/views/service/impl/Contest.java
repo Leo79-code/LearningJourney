@@ -18,7 +18,7 @@ public class Contest implements IPageService {
     public Node generatePage(Pane root) {
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
-        Label test = new Label("Contest");
+        Label test = new Label("Awards");
         StyleUtil.setFont(test, Color.BLACK, 20);
         vbox.getChildren().add(test);
         return vbox;
