@@ -1,12 +1,20 @@
 package team.bupt.learningjourney.views.service.impl;
 
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import team.bupt.learningjourney.utils.StyleUtil;
 import team.bupt.learningjourney.views.service.IPageService;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -16,12 +24,59 @@ public class Journal implements IPageService {
 
     @Override
     public Node generatePage(Pane root) {
-        VBox vbox = new VBox();
-        vbox.setAlignment(Pos.CENTER);
-        Label test = new Label("Portfolios");
-        StyleUtil.setFont(test, Color.BLACK, 20);
-        vbox.getChildren().add(test);
-        return vbox;
-    }
+        BorderPane borderPane = new BorderPane();
+        //上端布局
+        Button button1 = new Button("Check");
+        button1.setTextFill(Color.GRAY);
+        button1.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        HBox hBox1 = new HBox(22);
+        hBox1.setAlignment(Pos.CENTER);
+        hBox1.setMinHeight(90);
+        Label top1 = new Label("Please choose semester:");
+        top1.setTextFill(Color.BLACK);
+        top1.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        ChoiceBox choiceBox1 = new ChoiceBox(FXCollections.observableArrayList("one","two","three","four","five","six","seven","eight"));
+        Label top2 = new Label("Please choose week:");
+        top2.setTextFill(Color.BLACK);
+        top2.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        ChoiceBox choiceBox2 = new ChoiceBox(FXCollections.observableArrayList("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"));
+        hBox1.getChildren().addAll(top1,choiceBox1,top2,choiceBox2,button1);
+        borderPane.setTop(hBox1);
 
+        //中间布局
+        Text text3 = new Text("Welcome to My Journey!");
+        text3.setFill(Color.ORANGE);
+        text3.setFont(Font.font("Verdana", FontWeight.BOLD, 40));
+        HBox hBox2 = new HBox();
+        hBox2.setMinHeight(90);
+        hBox2.setAlignment(Pos.CENTER);
+        hBox2.getChildren().add(text3);
+        borderPane.setCenter(hBox2);
+        //下端布局
+        HBox hBox3 = new HBox(20);
+        hBox3.setMinHeight(90);
+        hBox3.setAlignment(Pos.CENTER);
+        Button button2 = new Button("Delete");
+        button2.setTextFill(Color.GRAY);
+        button2.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Button button3 = new Button("Append");
+        button3.setTextFill(Color.GRAY);
+        button3.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        hBox3.getChildren().addAll(button2,button3);
+        borderPane.setBottom(hBox3);
+
+
+
+        //Label left = new Label("这是左部");
+        //borderPane.setLeft(left);
+        //Label right = new Label("这是右部");
+        //borderPane.setRight(right);
+
+
+
+
+        borderPane.setBackground(Background.fill(Color.LIGHTGREY));
+        return borderPane;
+
+    }
 }
