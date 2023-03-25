@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 /**
  * @author
  */
-public class Portfolios implements IPageService {
+public class Journal implements IPageService {
 
     @Override
     public Node generatePage(Pane root) {

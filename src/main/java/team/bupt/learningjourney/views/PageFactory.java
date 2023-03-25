@@ -17,11 +17,11 @@ public class PageFactory {
             case "School Report":
                 pageService = new SchoolReport();
                 break;
-            case "Contest":
-                pageService = new Contest();
+            case "Awards":
+                pageService = new Awards();
                 break;
-            case "Log":
-                pageService = new Log();
+            case "Journal":
+                pageService = new Journal();
                 break;
             default:
                 pageService = new Timetable();

@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 /**
  * @author
  */
-public class Contest implements IPageService {
+public class Awards implements IPageService {
 
     @Override
     public Node generatePage(Pane root) {
