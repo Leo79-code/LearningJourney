@@ -5,6 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -47,11 +49,14 @@ public class Journal implements IPageService {
         Text text3 = new Text("Welcome to My Journey!");
         text3.setFill(Color.ORANGE);
         text3.setFont(Font.font("Verdana", FontWeight.BOLD, 40));
-        HBox hBox2 = new HBox();
-        hBox2.setMinHeight(90);
-        hBox2.setAlignment(Pos.CENTER);
-        hBox2.getChildren().add(text3);
-        borderPane.setCenter(hBox2);
+        VBox vBox2 = new VBox(20);
+        vBox2.setMinSize(10,10);
+        Image image = new Image("file:src/data/journey.jpg");
+        ImageView imageView = new ImageView(image);
+        vBox2.setAlignment(Pos.CENTER);
+        vBox2.getChildren().addAll(text3,imageView);
+        borderPane.setCenter(vBox2);
+
         //下端布局
         HBox hBox3 = new HBox(20);
         hBox3.setMinHeight(90);
@@ -71,9 +76,6 @@ public class Journal implements IPageService {
         //borderPane.setLeft(left);
         //Label right = new Label("这是右部");
         //borderPane.setRight(right);
-
-
-
 
         borderPane.setBackground(Background.fill(Color.LIGHTGREY));
         return borderPane;
