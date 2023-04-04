@@ -1,0 +1,13 @@
+[
+  {
+    "courseName": "Math",
+    "weekday": "Thu",
+    "time": 7
+
+  },
+  {
+    "courseName": "English",
+    "weekday": "Wed",
+    "time": "4"
+  }
+]

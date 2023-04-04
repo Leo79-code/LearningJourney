@@ -31,8 +31,8 @@ public class Courses implements IPageService {
 
     private final ObservableList<Person> data =
             FXCollections.observableArrayList(
-                    new Person(1, "2021-2022-1", "Java", "Professional",4,99),
-                    new Person(2, "2021-2022-2", "Database", "Professional",3,98)
+                    new Person(1, "2021-2022-1", "Java", "Professional", 4, 99),
+                    new Person(2, "2021-2022-2", "Database", "Professional", 3, 98)
             );
     final HBox hb = new HBox();
 
@@ -43,8 +43,8 @@ public class Courses implements IPageService {
         //final Label label = new Label("School Report");
         //label.setFont(new Font("Arial", 20));
         Text label = new Text("Courses");
-        label.setFont(Font.font("STLiti", FontWeight.BOLD,50));
-        label.setFill(Color.rgb(189,49,36));
+        label.setFont(Font.font("STLiti", FontWeight.BOLD, 50));
+        label.setFill(Color.rgb(189, 49, 36));
 
         table.setEditable(true);
 
@@ -126,7 +126,7 @@ public class Courses implements IPageService {
 
 
         table.setItems(data);
-        table.getColumns().addAll(NoCol,SemesterCol, NameCol,PropertyCol,CreditCol,GradeCol);
+        table.getColumns().addAll(NoCol, SemesterCol, NameCol, PropertyCol, CreditCol, GradeCol);
 
         //final TextField addsubject = new TextField();
         //addsubject.setPromptText("First Name");
@@ -139,7 +139,7 @@ public class Courses implements IPageService {
         //addgrade.setPromptText("grade");
 
         final Button ImButton = new Button("Import Data");
-        ImButton.setTextFill(Color.rgb(84,188,189,.7));
+        ImButton.setTextFill(Color.rgb(84, 188, 189, .7));
         ImButton.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
 
 
@@ -162,11 +162,10 @@ public class Courses implements IPageService {
         vbox.getChildren().addAll(table, hb);
 
         BorderPane bp = new BorderPane();
-        bp.setBackground(Background.fill(Color.rgb(242,202,42,.7)));
+        bp.setBackground(Background.fill(Color.rgb(242, 202, 42, .7)));
         bp.setPadding(new Insets(0, 120, 0, 120));
         bp.setTop(hbox1);
         bp.setCenter(vbox);
-
 
 
         //VBox vbox = new VBox();
@@ -195,6 +194,7 @@ public class Courses implements IPageService {
 
         return bp;
     }
+
     public static class Person {
 
         private final SimpleStringProperty No;
@@ -203,7 +203,6 @@ public class Courses implements IPageService {
         private final SimpleStringProperty Property;
         private final SimpleStringProperty Credit;
         private final SimpleStringProperty Grade;
-
 
 
         private Person(int No, String Semester, String Name, String Property, int Credit, int Grade) {
@@ -239,11 +238,14 @@ public class Courses implements IPageService {
             Name.set(name);
         }
 
-        public String getProperty() { return Property.get(); }
+        public String getProperty() {
+            return Property.get();
+        }
 
         public void setProperty(String pro) {
             Property.set(pro);
         }
+
         public String getCredit() {
             return Credit.get();
         }
@@ -251,6 +253,7 @@ public class Courses implements IPageService {
         public void setCredit(int cre) {
             Credit.set(Integer.toString(cre));
         }
+
         public String getGrade() {
             return Grade.get();
         }
