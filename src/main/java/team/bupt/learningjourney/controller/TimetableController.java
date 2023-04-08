@@ -1,5 +1,10 @@
 package team.bupt.learningjourney.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
@@ -8,11 +13,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import team.bupt.learningjourney.entities.CoursesTime;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import team.bupt.learningjourney.utils.TimetableImportDialog;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.List;
+
 
 public class TimetableController {
     @FXML
@@ -20,22 +26,12 @@ public class TimetableController {
     public GridPane timetable;
 
     ObjectMapper objectMapper = new ObjectMapper();
-    CoursesTime[] coursesTime;
+    File jsonFile = new File("src/main/resources/json/CoursesTime.json");
+    JsonNode rootNode = objectMapper.readTree(jsonFile);
+    List<CoursesTime> coursesTimes = objectMapper.readValue(jsonFile, new TypeReference<>() {
+    });
 
-    {
-        try {
-            coursesTime = objectMapper.readValue(new File("src/main/resources/json/CoursesTime.json"), CoursesTime[].class);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @FXML
-    public void initialize() {
-        for(int i = 0; i <= coursesTime.length - 1; i++){
-            addLabel(coursesTime[i]);
-        }
-
+    public TimetableController() throws IOException {
     }
 
     public void addLabel(CoursesTime coursesTime) {
@@ -56,4 +52,42 @@ public class TimetableController {
         timetable.add(label, col, coursesTime.getTime());
         GridPane.setHalignment(label, HPos.CENTER);
     }
+
+    @FXML
+    public void initialize() {
+        loadFile();
+    }
+
+    @FXML
+    protected void onImportButtonClick() {
+        TimetableImportDialog dialog = new TimetableImportDialog();
+        dialog.setHeaderText("Please fill in the course information");
+        dialog.showAndWait().ifPresent(result -> {
+
+            String name = result.getKey();
+            String week = result.getValue().getValue();
+            int time = Integer.parseInt(result.getValue().getKey());
+
+            ObjectNode childNode = objectMapper.createObjectNode();
+            childNode.put("courseName", name);
+            childNode.put("weekday", week);
+            childNode.put("time", time);
+            ((ArrayNode) rootNode).add(childNode);
+
+            try {
+                objectMapper.writeValue(jsonFile, rootNode);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            loadFile();
+        });
+    }
+
+    public void loadFile() {
+        for (CoursesTime coursesTime : coursesTimes) {
+            addLabel(coursesTime);
+        }
+    }
 }
+

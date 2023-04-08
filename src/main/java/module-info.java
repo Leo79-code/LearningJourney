@@ -8,6 +8,7 @@ module team.bupt.learningjourney {
     exports team.bupt.learningjourney;
     exports team.bupt.learningjourney.utils;
     exports team.bupt.learningjourney.controller;
+    exports team.bupt.learningjourney.entities;
 
     opens team.bupt.learningjourney.utils to javafx.fxml;
     opens team.bupt.learningjourney.controller to javafx.fxml;

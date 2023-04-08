@@ -18,7 +18,7 @@ public class Timetable implements IPageService {
     @Override
     public Node generatePage(Pane root) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/view-timetable.fxml"));
-        Parent node = null;
+        Parent node;
         try {
             node = fxmlLoader.load();
         } catch (IOException e) {
