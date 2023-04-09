@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import team.bupt.learningjourney.controller.JournalController;
 import team.bupt.learningjourney.utils.StyleUtil;
 import team.bupt.learningjourney.views.service.IPageService;
 import javafx.geometry.Pos;
@@ -19,14 +20,18 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
+
 /**
  * @author
  */
 public class Journal implements IPageService {
 
+    public BorderPane borderPane;
+
     @Override
     public Node generatePage(Pane root) {
-        BorderPane borderPane = new BorderPane();
+        borderPane = new BorderPane();
         //上端布局
         Button button1 = new Button("Check");
         button1.setTextFill(Color.GRAY);
@@ -71,12 +76,13 @@ public class Journal implements IPageService {
         borderPane.setBottom(hBox3);
 
 
-        //Label left = new Label("这是左部");
-        //borderPane.setLeft(left);
-        //Label right = new Label("这是右部");
-        //borderPane.setRight(right);
-
         borderPane.setBackground(Background.fill(Color.LIGHTGREY));
+        try {JournalController journalController = new JournalController();
+            journalController.loadFile();
+        }
+        catch (IOException e){}
+
+
         return borderPane;
 
     }
