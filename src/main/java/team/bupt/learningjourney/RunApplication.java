@@ -1,5 +1,6 @@
 package team.bupt.learningjourney;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import team.bupt.learningjourney.utils.DataUtil;
 import team.bupt.learningjourney.utils.ProjectValues;
 import team.bupt.learningjourney.utils.StyleUtil;
 import team.bupt.learningjourney.views.PageFactory;
+
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -18,6 +20,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import static team.bupt.learningjourney.controller.ControllerInitiator.initPageController;
 
 /**
  * @author Jian Liu
@@ -37,7 +41,7 @@ public class RunApplication extends Application {
         root = new HBox();
         leftMenu = (VBox) getLeftMenu(root);
         root.getChildren().add(leftMenu);
-        currentPageNode = PageFactory.createPageService("Timetable").generatePage(root);
+        currentPageNode = PageFactory.createPageService("welcome").generatePage(root);
         HBox.setHgrow(currentPageNode, Priority.ALWAYS);
         root.getChildren().add(currentPageNode);
         StyleUtil.setPaneBackground(root, Color.WHITE);
@@ -64,8 +68,10 @@ public class RunApplication extends Application {
     /**
      * Right side page routing
      */
-    private Node routePage(Pane root, String itemName) {
-        return PageFactory.createPageService(itemName).generatePage(root);
+    private Node routePage(Pane root, String itemName) throws IOException {
+        Node node = PageFactory.createPageService(itemName).generatePage(root);
+        initPageController(itemName, node);
+        return node;
     }
 
     /**
@@ -98,7 +104,11 @@ public class RunApplication extends Application {
             });
             button.setOnMouseClicked(event -> {
                 currentMenuIndex = DataUtil.getIndexForArray(itemNames, button.getText());
-                currentPageNode = routePage(root, name);
+                try {
+                    currentPageNode = routePage(root, name);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 root.getChildren().remove(1);    //Clear the right page routing component node
                 HBox.setHgrow(currentPageNode, Priority.ALWAYS);
                 root.getChildren().add(currentPageNode);

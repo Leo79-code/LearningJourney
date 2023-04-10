@@ -1,8 +1,6 @@
 package team.bupt.learningjourney.views.service.impl;
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
@@ -11,22 +9,19 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import team.bupt.learningjourney.controller.JournalController;
-import team.bupt.learningjourney.utils.StyleUtil;
 import team.bupt.learningjourney.views.service.IPageService;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
-import java.io.IOException;
-
 /**
  * @author
  */
 public class Journal implements IPageService {
 
+    private JournalController journalController;
     public BorderPane borderPane;
 
     @Override
@@ -75,15 +70,8 @@ public class Journal implements IPageService {
         hBox3.getChildren().addAll(button2, button3);
         borderPane.setBottom(hBox3);
 
-
         borderPane.setBackground(Background.fill(Color.LIGHTGREY));
-        try {JournalController journalController = new JournalController();
-            journalController.loadFile();
-        }
-        catch (IOException e){}
-
 
         return borderPane;
-
     }
 }

@@ -195,6 +195,7 @@ public class Courses implements IPageService {
         return bp;
     }
 
+    //这个应该作为独立的类放到Entity里!
     public static class Person {
 
         private final SimpleStringProperty No;

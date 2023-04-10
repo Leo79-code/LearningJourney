@@ -24,10 +24,10 @@ public class TimetableImportDialog extends Dialog<Pair<String, Pair<String, Stri
         grid.add(new Label("Course Name:"), 0, 0);
         grid.add(nameField, 1, 0);
 
-        grid.add(new Label("Weekday:"), 0, 2);
+        grid.add(new Label("Weekday:"), 0, 1);
         grid.add(weekField, 1, 1);
 
-        grid.add(new Label("Class Time:"), 0, 1);
+        grid.add(new Label("Class Time:"), 0, 2);
         grid.add(timeField, 1, 2);
 
         // 将GridPane添加到对话框中

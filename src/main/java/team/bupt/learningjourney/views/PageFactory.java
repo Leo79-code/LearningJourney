@@ -7,10 +7,12 @@ import team.bupt.learningjourney.views.service.impl.*;
  * @author Jian Liu
  */
 public class PageFactory {
-
     public static IPageService createPageService(String itemName) {
         IPageService pageService = null;
         switch (itemName) {
+            case "Timetable":
+                pageService = new Timetable();
+                break;
             case "Courses":
                 pageService = new Courses();
                 break;
@@ -24,7 +26,7 @@ public class PageFactory {
                 pageService = new Journal();
                 break;
             default:
-                pageService = new Timetable();
+                pageService = new Welcome();
                 break;
         }
         return pageService;
