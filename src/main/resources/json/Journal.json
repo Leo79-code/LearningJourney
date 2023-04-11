@@ -3,4 +3,4 @@
 },
   {"sem": "two","week": 2,"des": "Today, I feel sad, because I lose my girl friend!",
     "url": "file:src/main/resources/girlFriend2.jpg"
-  },{"sem": "three","week": 3,"des": "I feel nervous because of the exam.","url": "file:src/main/resources/exam.jpg"}]
+  },{"sem": "three","week": 3,"des": "I feel nervous because of the exam.","url": "file:src/main/resources/exam.jpg"},{"sem": "four","week": 4,"des": "During the weekends, I visit Chongqing, which is a beautiful city.","url": "file:src/main/resources/chongqing.jpg"}]
