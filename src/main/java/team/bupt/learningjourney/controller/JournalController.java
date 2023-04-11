@@ -3,6 +3,8 @@ package team.bupt.learningjourney.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,6 +27,7 @@ import java.util.List;
 
 import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.Journal;
+import team.bupt.learningjourney.utils.TimetableImportDialog;
 
 public class JournalController {
 
@@ -61,16 +64,14 @@ public class JournalController {
     hBox1.getChildren().addAll(top1, choiceBox1, top2, choiceBox2, button1);
     borderPane.setTop(hBox1);
 
-        button1.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-
-                System.out.println("sem : "+sem);
-                System.out.println("week : "+week);
-                loadFile();
-            }
-        });
+    button1.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent e) {
+            System.out.println("sem : "+sem);
+            System.out.println("week : "+week);
+            loadFile();
+        }
+    });
 
         //中间布局
         Text text3 = new Text("Welcome to My Journey!");
@@ -90,9 +91,46 @@ public class JournalController {
         Button button2 = new Button("Delete");
         button2.setTextFill(Color.GRAY);
         button2.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                TimetableImportDialog dialog = new TimetableImportDialog();
+                dialog.setHeaderText("Please fill in the journey information");
+                dialog.showAndWait().ifPresent(result -> {
+
+                    String name = result.getKey();
+                    String week = result.getValue().getValue();
+                    int time = Integer.parseInt(result.getValue().getKey());
+
+                    ObjectNode childNode = objectMapper.createObjectNode();
+                    childNode.put("semester", name);
+                    childNode.put("week", week);
+                    childNode.put("picture's url", time);
+                    ((ArrayNode) rootNode).add(childNode);
+
+//                    try {
+//                        objectMapper.writeValue(jsonFile, rootNode);
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+
+                    loadFile();
+                });
+            }
+        });
+
+
         Button button3 = new Button("Append");
         button3.setTextFill(Color.GRAY);
         button3.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        button3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+
+                //loadFile();
+            }
+        });
+
         hBox3.getChildren().addAll(button2, button3);
         borderPane.setBottom(hBox3);
         borderPane.setBackground(Background.fill(Color.LIGHTGREY));
@@ -114,7 +152,6 @@ public class JournalController {
         System.out.println(url);
         Image image = new Image(url);
         ImageView imageView = new ImageView(image);
-
         System.out.println(sem);
         System.out.println(week);
         if(sem1.equals(sem)||String.valueOf(week1).equals(week)) {
