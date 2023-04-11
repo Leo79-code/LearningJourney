@@ -1,8 +1,41 @@
 [{
-  "No": 1,
-  "Semester": "2021-2022-1",
-  "Name": "",
-  "Property": "",
-  "Credit": "",
-  "Grade": ""
-}]
+  "courseNo": 1,
+  "semester": "2021-2022-1",
+  "courseName": "Advanced Mathematics",
+  "property": "compulsory",
+  "credit": "4",
+  "grade": "83"
+  },
+  {
+    "courseNo": 2,
+    "semester": "2021-2022-2",
+    "courseName": "Internet Protocol",
+    "property": "compulsory",
+    "credit": "3",
+    "grade": "96"
+  },
+  {
+    "courseNo": 3,
+    "semester": "2022-2023-1",
+    "courseName": "Java Advanced Programming",
+    "property": "compulsory",
+    "credit": "4",
+    "grade": "96"
+  },
+  {
+    "courseNo": 4,
+    "semester": "2022-2023-1",
+    "courseName": "Network Advanced Programming",
+    "property": "selected",
+    "credit": "4",
+    "grade": "92"
+  },
+  {
+    "courseNo": 5,
+    "semester": "2022-2023-2",
+    "courseName": "Telecommunication System",
+    "property": "selected",
+    "credit": "3",
+    "grade": "93.5"
+  }
+]

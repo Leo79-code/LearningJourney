@@ -16,6 +16,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import team.bupt.learningjourney.controller.SchoolReportController;
+
+import java.io.IOException;
+
 /**
  * @author
  */
@@ -47,37 +51,45 @@ public class SchoolReport implements IPageService {
         avg.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         grid.add(avg, 0, 4);
 
+        /*
         Text avg_val = new Text("94.17");
         avg_val.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         avg_val.setFill(Color.BLUEVIOLET);
         grid.add(avg_val, 3, 4);
+        */
 
         Label gpa = new Label("GPA");
         gpa.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         grid.add(gpa, 0, 6);
 
+        /*
         Text gpa_val = new Text("3.90/4");
         gpa_val.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         gpa_val.setFill(Color.BLUEVIOLET);
         grid.add(gpa_val, 3, 6);
+        */
 
         Label total_avg = new Label("Total Average Score of Courses");
         total_avg.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         grid.add(total_avg, 0, 8);
 
+        /*
         Text total_avg_val = new Text("95.45");
         total_avg_val.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         total_avg_val.setFill(Color.BLUEVIOLET);
         grid.add(total_avg_val, 3, 8);
+        */
 
         Label quoEstim = new Label("Quota Estimate for Postgraduate Recommendation");
         quoEstim.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         grid.add(quoEstim, 0, 10);
 
+        /*
         Text quoEstim_val = new Text("35/173");
         quoEstim_val.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         quoEstim_val.setFill(Color.BLUEVIOLET);
         grid.add(quoEstim_val, 3, 10);
+         */
 
         Button btn = new Button("Export Certificate");
         btn.setTextFill(Color.rgb(84, 188, 189, .7));
@@ -91,14 +103,21 @@ public class SchoolReport implements IPageService {
         final Text actiontarget = new Text();
         grid.add(actiontarget, 0, 16, 5, 1);
 
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        try {
+            SchoolReportController sr = new SchoolReportController(grid);
+            grid = sr.loadFile();
 
-            @Override
-            public void handle(ActionEvent e) {
-                actiontarget.setFill(Color.FIREBRICK);
-                actiontarget.setText("Your Certificate has been Generated");
-            }
-        });
-        return grid;
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent e) {
+                    actiontarget.setFill(Color.FIREBRICK);
+                    actiontarget.setText("Your Certificate has been Generated");
+                }
+            });
+            return grid;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
