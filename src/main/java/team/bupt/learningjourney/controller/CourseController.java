@@ -47,13 +47,14 @@ public class CourseController {
     public BorderPane loadFile() {
 
         TableView<CourseInfo> table = new TableView<>();
-        final HBox hb = new HBox();
 
-        TableColumn<CourseInfo, String> NoCol =
-                new TableColumn<>("No");
+
+
+        final ObservableList<CourseInfo>data = FXCollections.observableArrayList();
+
+        TableColumn<CourseInfo, String> NoCol = new TableColumn<>("No");
         NoCol.setMinWidth(75);
-        NoCol.setCellValueFactory(
-                new PropertyValueFactory<>("no"));
+        NoCol.setCellValueFactory(new PropertyValueFactory<>("no"));
 
         NoCol.setCellFactory(TextFieldTableCell.<CourseInfo>forTableColumn());
         NoCol.setOnEditCommit(
@@ -135,33 +136,18 @@ public class CourseController {
 
 
         for (CourseInfo course : courses) {
-            ObservableList<CourseInfo> data =
-                    FXCollections.observableArrayList(
-                            new CourseInfo(course.getCourseNo(),course.getSemester(),course.getCourseName(),course.getProperty(),course.getCredit(),course.getGrade())
-                    );
-            //new CourseInfo(course.getCourseNo(),course.getSemester(),course.getCourseName(),course.getProperty(),course.getCredit(),course.getGrade()),
-
-            table.setItems(data);
-
+            data.add(
+                    new CourseInfo(course.getCourseNo(), course.getSemester(), course.getCourseName(), course.getProperty(), course.getCredit(), course.getGrade())
+            );
         }
+        table.setItems(data);
 
-
-
-        final Button ImButton = new Button("Import Data");
-        ImButton.setTextFill(Color.rgb(84, 188, 189, .7));
-        ImButton.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-
-
-        hb.getChildren().addAll(ImButton);
-        hb.setAlignment(Pos.CENTER);
-        hb.setPadding(new Insets(40, 0, 40, 0));
-        hb.setSpacing(3);
 
         final VBox vbox = new VBox();
         vbox.setSpacing(0);
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(10, 0, 0, 10));
-        vbox.getChildren().addAll(table, hb);
+        vbox.getChildren().addAll(table);
 
 
         bp.setCenter(vbox);

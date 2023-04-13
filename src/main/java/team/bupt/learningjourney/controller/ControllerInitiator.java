@@ -27,7 +27,6 @@ public class ControllerInitiator {
                 journalController.loadFile();
                 break;
             default:
-
                 break;
         }
         return;
