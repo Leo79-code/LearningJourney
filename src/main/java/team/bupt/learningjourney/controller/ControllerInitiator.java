@@ -12,7 +12,8 @@ public class ControllerInitiator {
             case "Timetable":
                 break;
             case "Courses":
-
+                CourseController courseController = new CourseController((BorderPane) node);
+                courseController.loadFile();
                 break;
             case "School Report":
                 SchoolReportController schoolReportController = new SchoolReportController((GridPane) node);

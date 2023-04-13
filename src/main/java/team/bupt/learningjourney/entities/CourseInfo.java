@@ -1,5 +1,6 @@
 package team.bupt.learningjourney.entities;
 
+import javafx.beans.property.SimpleStringProperty;
 public class CourseInfo {
     private String courseNo;
     private String semester;
@@ -69,3 +70,6 @@ public class CourseInfo {
         this.grade = grade;
     }
 }
+
+
+
