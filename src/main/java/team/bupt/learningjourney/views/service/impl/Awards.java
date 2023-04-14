@@ -1,17 +1,22 @@
 package team.bupt.learningjourney.views.service.impl;
 
 import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import team.bupt.learningjourney.controller.AwardsController;
+import team.bupt.learningjourney.controller.CourseController;
 import team.bupt.learningjourney.utils.StyleUtil;
 import team.bupt.learningjourney.views.service.IPageService;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
+
+import java.io.IOException;
 
 
 /**
@@ -23,9 +28,11 @@ public class Awards implements IPageService {
     public Node generatePage(Pane root) {
         BorderPane borderPane = new BorderPane();
         borderPane.setBackground(Background.fill(Color.rgb(242, 202, 42, .7)));
+        borderPane.setPadding(new Insets(0, 120, 0, 120));
 
         //top design
         BorderPane top = new BorderPane();
+        top.setPadding(new Insets(40, 0, 40, 0));
         //top center design
         HBox topCenter = new HBox();
         topCenter.setMinHeight(89);
@@ -53,31 +60,9 @@ public class Awards implements IPageService {
         top.setCenter(topCenter);
         top.setBottom(topBottom);
 
-
-        //center design
-        HBox center = new HBox();
-        TableView<Awards> table = new TableView();
-        TableColumn awardName = new TableColumn("Award Name");
-        TableColumn year = new TableColumn("year");
-        TableColumn kind = new TableColumn("kind");
-        TableColumn projectName = new TableColumn("projectName");
-        TableColumn member = new TableColumn("member");
-        TableColumn award = new TableColumn("award");
-        TableColumn bonus = new TableColumn("bonus");
-
-        awardName.setMinWidth(125);
-        year.setMinWidth(125);
-        kind.setMinWidth(125);
-        projectName.setMinWidth(125);
-        member.setMinWidth(125);
-        award.setMinWidth(125);
-        bonus.setMinWidth(125);
-        table.getColumns().addAll(awardName, year, kind, projectName, member, award, bonus);
-        center.getChildren().addAll(table);
-        center.setAlignment(Pos.CENTER);
-
         //bottom design
         HBox bottom = new HBox(200);
+        bottom.setPadding(new Insets(40, 0, 40, 0));
         Button Modify = new Button("Modify");
         Modify.setTextFill(Color.rgb(84, 188, 189, .7));
         Modify.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
@@ -92,10 +77,16 @@ public class Awards implements IPageService {
         bottom.setAlignment(Pos.CENTER);
 
         borderPane.setTop(top);
-        borderPane.setCenter(center);
         borderPane.setBottom(bottom);
 
-        return borderPane;
+        try {
+            AwardsController sr = new AwardsController(borderPane);
+            borderPane = sr.loadFile();
+
+            return borderPane;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

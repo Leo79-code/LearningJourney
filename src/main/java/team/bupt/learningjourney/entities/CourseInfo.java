@@ -22,6 +22,9 @@ public class CourseInfo {
         this.grade = grade;
     }
 
+    public CourseInfo(String awardName, String year, String kind, String projectName, String member, String award, double bonus) {
+    }
+
     public String getCourseNo() {
         return courseNo;
     }
