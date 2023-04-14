@@ -30,36 +30,38 @@ public class Awards implements IPageService {
         borderPane.setBackground(Background.fill(Color.rgb(242, 202, 42, .7)));
         borderPane.setPadding(new Insets(0, 120, 0, 120));
 
-        //top design
-        BorderPane top = new BorderPane();
-        top.setPadding(new Insets(40, 0, 40, 0));
-        //top center design
-        HBox topCenter = new HBox();
-        topCenter.setMinHeight(89);
-
-        Text Awards = new Text("Awards");
-        Awards.setFont(Font.font("STLiti", FontWeight.BOLD, 50));
-        Awards.setFill(Color.rgb(189, 49, 36));
-        topCenter.setAlignment(Pos.CENTER);
-        topCenter.getChildren().addAll(Awards);
-        //top bottom design
-        HBox topBottom = new HBox(30);
-        topBottom.setMinHeight(60);
-        Text Year = new Text("Year: ");
-        Year.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
-        ChoiceBox choiceBox1 = new ChoiceBox(FXCollections.observableArrayList("2020-2021", "2021-2022", "2022-2023", "2023-2024"));
-        Text Kind = new Text("Kind: ");
-        Kind.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
-        ChoiceBox choiceBox2 = new ChoiceBox(FXCollections.observableArrayList("Innovation", "Subject", "Business", "Sports", "Art", "Honorary Title"));
-        Button Query = new Button("Query");
-        Query.setTextFill(Color.rgb(147, 210, 243));
-        Query.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        topBottom.getChildren().addAll(Year, choiceBox1, Kind, choiceBox2, Query);
-        topBottom.setAlignment(Pos.CENTER);
-
-        top.setCenter(topCenter);
-        top.setBottom(topBottom);
-
+//        //top design
+//        BorderPane top = new BorderPane();
+//        top.setPadding(new Insets(40, 0, 40, 0));
+//        //top center design
+//        HBox topCenter = new HBox();
+//        topCenter.setMinHeight(89);
+//
+//        Text Awards = new Text("Awards");
+//        Awards.setFont(Font.font("STLiti", FontWeight.BOLD, 50));
+//        Awards.setFill(Color.rgb(189, 49, 36));
+//        topCenter.setAlignment(Pos.CENTER);
+//        topCenter.getChildren().addAll(Awards);
+//        //top bottom design
+//        HBox topBottom = new HBox(30);
+//        topBottom.setMinHeight(60);
+//        Text Year = new Text("Year: ");
+//        Year.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
+//        ChoiceBox choiceBox1 = new ChoiceBox(FXCollections.observableArrayList("2020-2021", "2021-2022", "2022-2023", "2023-2024"));
+//        Text Kind = new Text("Kind: ");
+//        Kind.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
+//        ChoiceBox choiceBox2 = new ChoiceBox(FXCollections.observableArrayList("Innovation", "Subject", "Business", "Sports", "Art", "Honorary Title"));
+//        Button Query = new Button("Query");
+//        Query.setTextFill(Color.rgb(147, 210, 243));
+//        Query.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+//        topBottom.getChildren().addAll(Year, choiceBox1, Kind, choiceBox2, Query);
+//        topBottom.setAlignment(Pos.CENTER);
+//
+//        top.setCenter(topCenter);
+//        top.setBottom(topBottom);
+//
+//
+//        borderPane.setTop(top);
         //bottom design
         HBox bottom = new HBox(200);
         bottom.setPadding(new Insets(40, 0, 40, 0));
@@ -76,7 +78,7 @@ public class Awards implements IPageService {
         bottom.getChildren().addAll(Modify, Add, Delete);
         bottom.setAlignment(Pos.CENTER);
 
-        borderPane.setTop(top);
+
         borderPane.setBottom(bottom);
 
         try {
