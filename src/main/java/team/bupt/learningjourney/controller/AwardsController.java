@@ -3,6 +3,7 @@ package team.bupt.learningjourney.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.ISO8601Utils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -62,7 +63,7 @@ public class AwardsController {
         topBottom.setMinHeight(60);
         Text Year = new Text("Year: ");
         Year.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
-        ChoiceBox<String> choiceBox1 = new ChoiceBox<String>(FXCollections.observableArrayList("2020-2021", "2021-2022", "2022-2023", "2023-2024"));
+        ChoiceBox<String> choiceBox1 = new ChoiceBox<String>(FXCollections.observableArrayList("2020", "2021", "2022", "2023"));
         choiceBox1.setOnAction(e->year=choiceBox1.getSelectionModel().getSelectedItem());
 
         Text Kind = new Text("Kind: ");
@@ -84,8 +85,8 @@ public class AwardsController {
         Query.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                System.out.println("year : "+year);
-                System.out.println("kind : "+kind);
+//                System.out.println("year : "+year);
+//                System.out.println("kind : "+kind);
                 loadFile();
             }
         });
@@ -93,7 +94,9 @@ public class AwardsController {
     }
 
     public BorderPane loadFile() {
-
+        System.out.println("UI data:");
+        System.out.println(year);
+        System.out.println(kind);
         TableView<Award> table = new TableView<>();
 
         final ObservableList<Award> data = FXCollections.observableArrayList();
@@ -195,9 +198,29 @@ public class AwardsController {
         bonusCol.setCellValueFactory(cellData -> new SimpleStringProperty(Double.toString(cellData.getValue().getBonus())));
 
         for (Award award : awards) {
-            data.add(
-                    new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(),award.getBonus())
-            );
+            String jyear = award.getYear();
+            String jkind = award.getKind();
+            System.out.println("json：");
+            System.out.println(jyear);
+            System.out.println(jkind);
+
+            if(year==null&&kind==null) {
+                System.out.println("_________________________________");
+                data.add(
+                        new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
+                );
+            }
+            if(jyear.equals(year)&&jkind.equals(kind)) {
+                System.out.println("_________________________________");
+                data.add(
+                        new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
+                );
+            }
+//            else {
+//                data.add(
+//                      new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
+//                );
+//            }
         }
         table.setItems(data);
 

@@ -154,17 +154,30 @@ public class JournalController {
         ImageView imageView = new ImageView(image);
         System.out.println(sem);
         System.out.println(week);
-        if(sem1.equals(sem)||String.valueOf(week1).equals(week)) {
+        System.out.println("---------------------");
+
+
+        if(week!=null && sem1.equals(sem)){
+            VBox vBox1 = new VBox(20);
+            vBox1.setMinSize(10, 10);
+            vBox1.setAlignment(Pos.CENTER);
+            Label label1 = new Label("No Record!");
+            label1.setFont(Font.font("",FontWeight.BOLD,20));
+            vBox1.getChildren().add(label1);
+            borderPane.setCenter(vBox1);
+            System.out.println("匹配失败，展示初始页面");
+        }
+        if(sem1.equals(sem)&&String.valueOf(week1).equals(week)) {
             VBox vBox = new VBox(20);
             vBox.setMinSize(10, 10);
             vBox.setAlignment(Pos.CENTER);
             vBox.getChildren().addAll(imageView,label);
             borderPane.setCenter(vBox);
             System.out.println("匹配成功！");
+
         }
-        else{
-            System.out.println("匹配失败，展示初始页面");
-        }
+
+
     }
 }
 
