@@ -9,7 +9,5 @@ import javafx.scene.layout.Pane;
  * @author Jian Liu
  */
 public interface IPageService {
-
     Node generatePage(Pane root);
-
 }

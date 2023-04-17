@@ -1,6 +1,5 @@
 package team.bupt.learningjourney.views.service.impl;
 
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -9,15 +8,12 @@ import team.bupt.learningjourney.views.service.IPageService;
 
 import java.io.IOException;
 
-
-/**
- * @author Liu Jian
- */
-public class Timetable implements IPageService {
-
+public class Welcome implements IPageService {
+    /**
+     */
     @Override
     public Node generatePage(Pane root) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/view-timetable.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/view-welcome.fxml"));
         Parent node;
         try {
             node = fxmlLoader.load();

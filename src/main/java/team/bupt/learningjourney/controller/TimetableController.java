@@ -1,5 +1,10 @@
 package team.bupt.learningjourney.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
@@ -7,25 +12,81 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import team.bupt.learningjourney.entities.CoursesTime;
+import team.bupt.learningjourney.utils.TimetableImportDialog;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 
 public class TimetableController {
     @FXML
     public BorderPane rootPane;
     public GridPane timetable;
 
+    ObjectMapper objectMapper = new ObjectMapper();
+    File jsonFile = new File("src/main/resources/json/CoursesTime.json");
+    JsonNode rootNode = objectMapper.readTree(jsonFile);
+    List<CoursesTime> coursesTimes = objectMapper.readValue(jsonFile, new TypeReference<>() {
+    });
+
+    public TimetableController() throws IOException {
+    }
+
+    public void addLabel(CoursesTime coursesTime) {
+        Label label = new Label(coursesTime.getCourseName());
+        label.setFont(Font.font("", FontWeight.BOLD, 28));
+
+        String weekdays = coursesTime.getWeekday();
+        int col = switch (weekdays) {
+            case "Mon" -> 1;
+            case "Tue" -> 2;
+            case "Wed" -> 3;
+            case "Thu" -> 4;
+            case "Fri" -> 5;
+            case "Sat" -> 6;
+            case "Sun" -> 7;
+            default -> 0;
+        };
+        timetable.add(label, col, coursesTime.getTime());
+        GridPane.setHalignment(label, HPos.CENTER);
+    }
 
     @FXML
     public void initialize() {
-        addLabel("Math",1, 2);
-        addLabel("English",5, 2);
-        addLabel("PE",3, 4);
-        addLabel("EBU5001",2, 7);
+        loadFile();
     }
 
-    public void addLabel(String name, int col, int row) {
-        Label label = new Label(name);
-        label.setFont(Font.font("", FontWeight.BOLD, 28));
-        timetable.add(label, col, row);
-        GridPane.setHalignment(label, HPos.CENTER);
+    @FXML
+    protected void onImportButtonClick() {
+        TimetableImportDialog dialog = new TimetableImportDialog();
+        dialog.setHeaderText("Please fill in the course information");
+        dialog.showAndWait().ifPresent(result -> {
+
+            String name = result.getKey();
+            String week = result.getValue().getValue();
+            int time = Integer.parseInt(result.getValue().getKey());
+
+            ObjectNode childNode = objectMapper.createObjectNode();
+            childNode.put("courseName", name);
+            childNode.put("weekday", week);
+            childNode.put("time", time);
+            ((ArrayNode) rootNode).add(childNode);
+
+            try {
+                objectMapper.writeValue(jsonFile, rootNode);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            loadFile();
+        });
+    }
+
+    public void loadFile() {
+        for (CoursesTime coursesTime : coursesTimes) {
+            addLabel(coursesTime);
+        }
     }
 }
