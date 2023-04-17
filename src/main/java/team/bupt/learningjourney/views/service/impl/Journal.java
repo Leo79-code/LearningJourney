@@ -9,8 +9,10 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
 import team.bupt.learningjourney.controller.JournalController;
 import team.bupt.learningjourney.views.service.IPageService;
+
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;

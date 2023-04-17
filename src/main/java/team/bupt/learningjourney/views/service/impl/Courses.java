@@ -17,6 +17,7 @@ import team.bupt.learningjourney.views.service.IPageService;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
+
 import team.bupt.learningjourney.entities.CourseInfo;
 import javafx.scene.layout.Background;
 import team.bupt.learningjourney.controller.CourseController;
@@ -25,12 +26,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.control.Button;
 import java.io.IOException;
 
+
 /**
  * @author
  */
 public class Courses implements IPageService {
-
-
 
     @Override
     public Node generatePage(Pane root)  {
@@ -50,7 +50,6 @@ public class Courses implements IPageService {
         final Button ImButton = new Button("Import Data");
         ImButton.setTextFill(Color.rgb(84, 188, 189, .7));
         ImButton.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-
 
         hb.getChildren().addAll(ImButton);
         hb.setAlignment(Pos.CENTER);
@@ -73,11 +72,3 @@ public class Courses implements IPageService {
         }
     }
 }
-
-
-
-
-
-
-
-

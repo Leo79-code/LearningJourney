@@ -36,6 +36,7 @@ public class SchoolReport implements IPageService {
         grid.setVgap(10);
         //填充:距离上下左右外框
         grid.setPadding(new Insets(25, 25, 25, 25));
+
         grid.setBackground(Background.fill(Color.rgb(242, 202, 42, .7)));
 
         Text scenetitle = new Text("Average Score & GPA");

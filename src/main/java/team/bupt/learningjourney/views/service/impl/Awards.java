@@ -8,6 +8,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+
 import team.bupt.learningjourney.controller.AwardsController;
 import team.bupt.learningjourney.controller.CourseController;
 import team.bupt.learningjourney.utils.StyleUtil;
@@ -17,7 +18,6 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
-
 
 /**
  * @author

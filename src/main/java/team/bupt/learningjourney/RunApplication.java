@@ -21,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+
 import static team.bupt.learningjourney.controller.ControllerInitiator.initPageController;
 
 /**
@@ -42,6 +43,7 @@ public class RunApplication extends Application {
         leftMenu = (VBox) getLeftMenu(root);
         root.getChildren().add(leftMenu);
         currentPageNode = PageFactory.createPageService("welcome").generatePage(root);
+
         HBox.setHgrow(currentPageNode, Priority.ALWAYS);
         root.getChildren().add(currentPageNode);
         StyleUtil.setPaneBackground(root, Color.WHITE);
