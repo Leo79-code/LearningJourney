@@ -74,8 +74,6 @@ public class TimetableController {
         TimetableImportDialog dialog = new TimetableImportDialog();
         dialog.setHeaderText("Please fill in the course information");
         dialog.showAndWait().ifPresent(result -> {
-
-
             String name = result[0];
             String week = result[1];
             int time = Integer.parseInt(result[2]);
