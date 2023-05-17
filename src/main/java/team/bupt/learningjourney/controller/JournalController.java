@@ -27,8 +27,7 @@ import java.util.List;
 
 import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.Journal;
-import team.bupt.learningjourney.utils.Dialogs.TimetableImportDialog;
-
+import team.bupt.learningjourney.utils.TimetableImportDialog;
 
 public class JournalController {
 
@@ -99,9 +98,9 @@ public class JournalController {
                 dialog.setHeaderText("Please fill in the journey information");
                 dialog.showAndWait().ifPresent(result -> {
 
-                    String name = result[0];
-                    String week = result[1];
-                    int time = Integer.parseInt(result[2]);
+                    String name = result.getKey();
+                    String week = result.getValue().getValue();
+                    int time = Integer.parseInt(result.getValue().getKey());
 
                     ObjectNode childNode = objectMapper.createObjectNode();
                     childNode.put("semester", name);
