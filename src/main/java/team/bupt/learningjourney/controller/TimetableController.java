@@ -15,6 +15,7 @@ import javafx.scene.text.FontWeight;
 import team.bupt.learningjourney.entities.CoursesTime;
 import team.bupt.learningjourney.utils.Dialogs.TimetableImportDialog;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +39,7 @@ public class TimetableController {
 
     public TimetableController() throws IOException {
     }
+
 
     /**
      * @param coursesTime A custom POJO class for storing course time information
@@ -72,6 +74,7 @@ public class TimetableController {
         TimetableImportDialog dialog = new TimetableImportDialog();
         dialog.setHeaderText("Please fill in the course information");
         dialog.showAndWait().ifPresent(result -> {
+
 
             String name = result[0];
             String week = result[1];

@@ -29,6 +29,7 @@ import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.Journal;
 import team.bupt.learningjourney.utils.Dialogs.TimetableImportDialog;
 
+
 public class JournalController {
 
     private final BorderPane borderPane;

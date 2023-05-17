@@ -18,3 +18,4 @@ module team.bupt.learningjourney {
     exports team.bupt.learningjourney.utils.Dialogs;
     opens team.bupt.learningjourney.utils.Dialogs to javafx.fxml;
 }
+
