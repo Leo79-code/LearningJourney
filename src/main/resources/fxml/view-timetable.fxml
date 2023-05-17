@@ -155,7 +155,6 @@
             </children>
         </GridPane>
     </bottom>
-=======
    <top>
       <Label text="Timetable" BorderPane.alignment="CENTER">
          <font>
