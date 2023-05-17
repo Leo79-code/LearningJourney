@@ -13,13 +13,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import team.bupt.learningjourney.entities.CoursesTime;
-import team.bupt.learningjourney.utils.TimetableImportDialog;
+import team.bupt.learningjourney.utils.Dialogs.TimetableImportDialog;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 
+/**
+ * @author Jian Liu
+ * @date 2023/05/15
+ * The JavaFX Controller for the Timetable Page
+ */
 public class TimetableController {
     @FXML
     public BorderPane rootPane;
@@ -34,6 +39,10 @@ public class TimetableController {
     public TimetableController() throws IOException {
     }
 
+    /**
+     * @param coursesTime A custom POJO class for storing course time information
+     * Set each course as a label and add it to the GridPane
+     */
     public void addLabel(CoursesTime coursesTime) {
         Label label = new Label(coursesTime.getCourseName());
         label.setFont(Font.font("", FontWeight.BOLD, 28));
@@ -64,9 +73,9 @@ public class TimetableController {
         dialog.setHeaderText("Please fill in the course information");
         dialog.showAndWait().ifPresent(result -> {
 
-            String name = result.getKey();
-            String week = result.getValue().getValue();
-            int time = Integer.parseInt(result.getValue().getKey());
+            String name = result[0];
+            String week = result[1];
+            int time = Integer.parseInt(result[2]);
 
             ObjectNode childNode = objectMapper.createObjectNode();
             childNode.put("courseName", name);
@@ -79,8 +88,6 @@ public class TimetableController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-            loadFile();
         });
     }
 

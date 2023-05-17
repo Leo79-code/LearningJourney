@@ -15,4 +15,6 @@ module team.bupt.learningjourney {
     opens team.bupt.learningjourney.views.service.impl to javafx.base;
     opens team.bupt.learningjourney to javafx.fxml;
     opens team.bupt.learningjourney.entities to com.fasterxml.jackson.databind;
+    exports team.bupt.learningjourney.utils.Dialogs;
+    opens team.bupt.learningjourney.utils.Dialogs to javafx.fxml;
 }

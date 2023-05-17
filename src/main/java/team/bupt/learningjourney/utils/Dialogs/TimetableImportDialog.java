@@ -1,10 +1,10 @@
-package team.bupt.learningjourney.utils;
+package team.bupt.learningjourney.utils.Dialogs;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 
-public class TimetableImportDialog extends Dialog<Pair<String, Pair<String, String>>> {
+public class TimetableImportDialog extends Dialog<String[]> {
 
     public TimetableImportDialog() {
         // 创建对话框的标题
@@ -35,12 +35,15 @@ public class TimetableImportDialog extends Dialog<Pair<String, Pair<String, Stri
 
         // 创建"导入"按钮
         ButtonType importButtonType = new ButtonType("Import", ButtonBar.ButtonData.OK_DONE);
-        getDialogPane().getButtonTypes().addAll(importButtonType, ButtonType.CANCEL);
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        getDialogPane().getButtonTypes().addAll(importButtonType, cancelButtonType);
 
         // 在用户点击"导入"按钮时执行操作
         setResultConverter(dialogButton -> {
             if (dialogButton == importButtonType) {
-                return new Pair<>(nameField.getText(), new Pair<>(timeField.getText(), weekField.getText()));
+                //TODO: 在button中调用Controller类中的load方法
+                String[] result = {nameField.getText(), weekField.getText(), timeField.getText()};
+                return result;
             }
             return null;
         });
