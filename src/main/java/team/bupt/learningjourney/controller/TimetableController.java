@@ -69,6 +69,9 @@ public class TimetableController {
         loadFile();
     }
 
+    /**
+     *
+     */
     @FXML
     protected void onImportButtonClick() {
         TimetableImportDialog dialog = new TimetableImportDialog();

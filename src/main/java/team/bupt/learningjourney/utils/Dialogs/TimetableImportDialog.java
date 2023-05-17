@@ -4,6 +4,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 
+/**
+ * @author Jian Liu
+ * @date 2023/05/17
+ *
+ */
 public class TimetableImportDialog extends Dialog<String[]> {
 
     public TimetableImportDialog() {
