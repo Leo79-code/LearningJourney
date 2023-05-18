@@ -3,6 +3,8 @@ package team.bupt.learningjourney.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,18 +16,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import team.bupt.learningjourney.entities.CourseInfo;
-import team.bupt.learningjourney.entities.Journal;
+import team.bupt.learningjourney.utils.Dialogs.CourseImportDialog;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+
 
 public class CourseController {
     BorderPane bp = new BorderPane();
@@ -50,7 +53,7 @@ public class CourseController {
 
 
 
-        final ObservableList<CourseInfo>data = FXCollections.observableArrayList();
+        final ObservableList<CourseInfo> data = FXCollections.observableArrayList();
 
         TableColumn<CourseInfo, String> NoCol = new TableColumn<>("No");
         NoCol.setMinWidth(75);
@@ -142,6 +145,20 @@ public class CourseController {
         }
         table.setItems(data);
 
+        final HBox hb = new HBox();
+
+        final Button ImButton = new Button("Import Data");
+        ImButton.setTextFill(Color.rgb(84, 188, 189, .7));
+        ImButton.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        ImButton.setOnAction(e->{
+            onImportButtonClick();
+        });
+
+        hb.getChildren().addAll(ImButton);
+        hb.setAlignment(Pos.CENTER);
+        hb.setPadding(new Insets(40, 0, 40, 0));
+        hb.setSpacing(3);
+
 
         final VBox vbox = new VBox();
         vbox.setSpacing(0);
@@ -151,9 +168,52 @@ public class CourseController {
 
 
         bp.setCenter(vbox);
+        bp.setBottom(hb);
 
         return this.bp;
     }
+
+
+    protected void onImportButtonClick() {
+        CourseImportDialog dialog = new CourseImportDialog();
+        dialog.setHeaderText("Please fill in the course information");
+        dialog.showAndWait().ifPresent(result -> {
+            int no1 = getLength()+1;
+            String no =  Integer.toString(no1);
+            String semester = result[0];
+            String name = result[1];
+            String property = result[2];
+            float credit = Float.parseFloat(result[3]);
+            float grade = Float.parseFloat(result[4]);
+
+
+            ObjectNode childNode = objectMapper.createObjectNode();
+            childNode.put("courseNo", no);
+            childNode.put("semester", semester);
+            childNode.put("courseName", name);
+            childNode.put("property", property);
+            childNode.put("credit", credit);
+            childNode.put("grade", grade);
+
+            ((ArrayNode) rootNode).add(childNode);
+
+            try {
+                objectMapper.writeValue(jsonFile, rootNode);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    public int getLength(){
+        int count=0;
+        for(CourseInfo course:courses){
+          count++;
+        }
+        return  count;
+    }
+
+
 
 }
 
