@@ -27,7 +27,7 @@ import java.util.List;
 
 import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.Journal;
-import team.bupt.learningjourney.utils.Dialogs.TimetableImportDialog;
+import team.bupt.learningjourney.utils.Dialogs.CourseImportDialog;
 
 
 public class JournalController {
@@ -95,7 +95,7 @@ public class JournalController {
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                TimetableImportDialog dialog = new TimetableImportDialog();
+                CourseImportDialog dialog = new CourseImportDialog();
                 dialog.setHeaderText("Please fill in the journey information");
                 dialog.showAndWait().ifPresent(result -> {
 

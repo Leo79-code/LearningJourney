@@ -45,22 +45,22 @@ public class Courses implements IPageService {
         hbox1.setPadding(new Insets(40, 0, 40, 0));
         hbox1.getChildren().addAll(label);
 
-        final HBox hb = new HBox();
-
-        final Button ImButton = new Button("Import Data");
-        ImButton.setTextFill(Color.rgb(84, 188, 189, .7));
-        ImButton.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-
-        hb.getChildren().addAll(ImButton);
-        hb.setAlignment(Pos.CENTER);
-        hb.setPadding(new Insets(40, 0, 40, 0));
-        hb.setSpacing(3);
+//        final HBox hb = new HBox();
+//
+//        final Button ImButton = new Button("Import Data");
+//        ImButton.setTextFill(Color.rgb(84, 188, 189, .7));
+//        ImButton.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+//
+//        hb.getChildren().addAll(ImButton);
+//        hb.setAlignment(Pos.CENTER);
+//        hb.setPadding(new Insets(40, 0, 40, 0));
+//        hb.setSpacing(3);
 
         BorderPane bp = new BorderPane();
         bp.setBackground(Background.fill(Color.rgb(242, 202, 42, .7)));
         bp.setPadding(new Insets(0, 120, 0, 120));
         bp.setTop(hbox1);
-        bp.setBottom(hb);
+        //bp.setBottom(hb);
 
         try {
             CourseController sr = new CourseController(bp);
