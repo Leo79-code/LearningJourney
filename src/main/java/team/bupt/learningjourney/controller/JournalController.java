@@ -27,7 +27,7 @@ import java.util.List;
 
 import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.Journal;
-import team.bupt.learningjourney.utils.Dialogs.TimetableImportDialog;
+import team.bupt.learningjourney.utils.Dialogs.CourseImportDialog;
 
 public class JournalController {
 
