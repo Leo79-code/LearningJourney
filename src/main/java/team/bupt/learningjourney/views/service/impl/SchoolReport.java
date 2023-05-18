@@ -1,6 +1,7 @@
 package team.bupt.learningjourney.views.service.impl;
 
 import javafx.scene.layout.Background;
+import team.bupt.learningjourney.controller.JSONToExcelUtil;
 import team.bupt.learningjourney.views.service.IPageService;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -20,11 +21,19 @@ import team.bupt.learningjourney.controller.SchoolReportController;
 
 import java.io.IOException;
 
+
 /**
- * @author
+ * @author Li Sizhe
+ * @date 2023/05/18
+ * The class is corresponding to the appearance of the page. It also defines the clicking action
  */
 public class SchoolReport implements IPageService {
 
+    /**
+     * @param root
+     * @return {@link Node} A Node is returned to RunApplication.java
+     * The method defines the structure and the content of the page
+     */
     @Override
     public Node generatePage(Pane root) {
         GridPane grid = new GridPane();
@@ -95,7 +104,6 @@ public class SchoolReport implements IPageService {
         Button btn = new Button("Export Certificate");
         btn.setTextFill(Color.rgb(84, 188, 189, .7));
         btn.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        //登录按钮放到水平布局HBox中方便控制左右
         //HBox hbBtn = new HBox(50);
         //hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         //hbBtn.getChildren().add(btn);
@@ -110,10 +118,15 @@ public class SchoolReport implements IPageService {
 
             btn.setOnAction(new EventHandler<ActionEvent>() {
 
+                /**
+                 * @param e The parameter refers to the an clicking event
+                 * The method defines what to happen when clicking the button
+                 */
                 @Override
                 public void handle(ActionEvent e) {
                     actiontarget.setFill(Color.FIREBRICK);
                     actiontarget.setText("Your Certificate has been Generated");
+                    new JSONToExcelUtil().exportExcel();
                 }
             });
             return grid;
