@@ -1,7 +1,7 @@
 package team.bupt.learningjourney.views.service.impl;
 
 import javafx.scene.layout.Background;
-import team.bupt.learningjourney.controller.JSONToExcelUtil;
+// import team.bupt.learningjourney.controller.JSONToExcelUtil;
 import team.bupt.learningjourney.views.service.IPageService;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -126,7 +126,7 @@ public class SchoolReport implements IPageService {
                 public void handle(ActionEvent e) {
                     actiontarget.setFill(Color.FIREBRICK);
                     actiontarget.setText("Your Certificate has been Generated");
-                    new JSONToExcelUtil().exportExcel();
+                    //new JSONToExcelUtil().exportExcel();
                 }
             });
             return grid;
