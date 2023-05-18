@@ -28,8 +28,6 @@ import java.util.List;
 import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.Journal;
 import team.bupt.learningjourney.utils.Dialogs.TimetableImportDialog;
-
-
 public class JournalController {
 
     private final BorderPane borderPane;
@@ -55,11 +53,9 @@ public class JournalController {
     top1.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
     ChoiceBox<String> choiceBox1 = new ChoiceBox<String>(FXCollections.observableArrayList("one", "two", "three", "four", "five", "six", "seven", "eight"));
     choiceBox1.setOnAction(e->sem=choiceBox1.getSelectionModel().getSelectedItem());
-    //System.out.println(sem);
     Label top2 = new Label("Please choose week:");
     top2.setTextFill(Color.BLACK);
     top2.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-    //Font font = new Font(FXCollections.observableArrayList("1","2"));
     ChoiceBox<String> choiceBox2 = new ChoiceBox<String>(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"));
     choiceBox2.setOnAction(e->week=choiceBox2.getSelectionModel().getSelectedItem());
     hBox1.getChildren().addAll(top1, choiceBox1, top2, choiceBox2, button1);
@@ -108,13 +104,6 @@ public class JournalController {
                     childNode.put("week", week);
                     childNode.put("picture's url", time);
                     ((ArrayNode) rootNode).add(childNode);
-
-//                    try {
-//                        objectMapper.writeValue(jsonFile, rootNode);
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
-
                     loadFile();
                 });
             }
@@ -127,8 +116,6 @@ public class JournalController {
         button3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-
-                //loadFile();
             }
         });
 
