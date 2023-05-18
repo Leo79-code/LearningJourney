@@ -4,6 +4,11 @@ module team.bupt.learningjourney {
     requires org.kordamp.bootstrapfx.core;
     requires javafx.base;
     requires com.fasterxml.jackson.databind;
+    requires com.alibaba.fastjson2;
+    requires org.apache.commons.lang3;
+    requires org.apache.poi.ooxml;
+    requires org.apache.commons.io;
+    requires fastjson;
 
     exports team.bupt.learningjourney;
     exports team.bupt.learningjourney.utils;
