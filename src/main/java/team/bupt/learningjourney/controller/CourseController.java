@@ -236,6 +236,7 @@ public class CourseController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            loadFile();
         });
     }
 
