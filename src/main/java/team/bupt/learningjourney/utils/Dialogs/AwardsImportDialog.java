@@ -2,7 +2,11 @@ package team.bupt.learningjourney.utils.Dialogs;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-
+/**
+ * @author Jiayi Meng
+ * @date 2023/05/19
+ * Used to implement importAward function
+ */
 public class AwardsImportDialog extends Dialog<String[]> {
     public AwardsImportDialog() {
         // 创建对话框的标题

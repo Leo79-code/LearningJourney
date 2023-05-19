@@ -33,7 +33,11 @@ import team.bupt.learningjourney.utils.Dialogs.CourseImportDialog;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * @author Jiayi Meng
+ * @date 2023/05/19
+ * This class is used to control the Award UI
+ */
 public class AwardsController {
     BorderPane bp = new BorderPane();
     //定义的变量
@@ -86,25 +90,17 @@ public class AwardsController {
         Query.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-//                System.out.println("year : "+year);
-//                System.out.println("kind : "+kind);
                 loadFile();
             }
         });
 
         HBox bottom = new HBox(200);
         bottom.setPadding(new Insets(40, 0, 40, 0));
-        Button Modify = new Button("Modify");
-        Modify.setTextFill(Color.rgb(84, 188, 189, .7));
-        Modify.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         Button Add = new Button("Add");;
         Add.setTextFill(Color.rgb(84, 188, 189, .7));
         Add.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        Button Delete = new Button("Delete");
-        Delete.setTextFill(Color.rgb(84, 188, 189, .7));
-        Delete.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         bottom.setMinHeight(100);
-        bottom.getChildren().addAll(Modify, Add, Delete);
+        bottom.getChildren().addAll(Add);
         bottom.setAlignment(Pos.CENTER);
         borderPane.setBottom(bottom);
         Add.setOnAction(new EventHandler<ActionEvent>() {
@@ -117,6 +113,9 @@ public class AwardsController {
 
     }
 
+    /**
+     *This method is used to load Awards.json
+     */
     public BorderPane loadFile() {
         System.out.println("UI data:");
         System.out.println(year);
@@ -256,7 +255,9 @@ public class AwardsController {
         return this.bp;
     }
 
-
+    /**
+     *The method is used to define action about import award.
+     */
     protected void onImportButtonClick() {
         AwardsImportDialog dialog = new AwardsImportDialog();
         dialog.setHeaderText("Please fill the Award information");

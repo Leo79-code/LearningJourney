@@ -20,7 +20,9 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 
 /**
- * @author
+ * @author Jiayi Meng
+ * @date 2023/05/19
+ * used to create a pane for UI
  */
 public class Awards implements IPageService {
 
