@@ -1,5 +1,10 @@
 package team.bupt.learningjourney.entities;
-//创建数据对象的
+
+/**
+ * @author Xinxiu Liu
+ * @date 2023/05/19
+ * define a journey object
+ */
 public class Journal {
     private String des;
     private String sem;

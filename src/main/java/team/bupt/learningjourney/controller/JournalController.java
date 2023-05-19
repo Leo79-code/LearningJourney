@@ -32,8 +32,12 @@ import team.bupt.learningjourney.utils.Dialogs.JournalImportDialog;
 
 import static java.lang.reflect.Array.getLength;
 
+/**
+ * @author Xinxiu Liu
+ * @date 2023/05/19
+ * This class is used to control the Journal UI
+ */
 public class JournalController {
-
     private final BorderPane borderPane;
 
     ObjectMapper objectMapper = new ObjectMapper();
@@ -73,7 +77,6 @@ public class JournalController {
             loadFile();
         }
     });
-
         //中间布局
         Text text3 = new Text("Welcome to My Journey!");
         text3.setFill(Color.ORANGE);
@@ -109,11 +112,19 @@ public class JournalController {
 
     }
 
+    /**
+     *This method is used to load Journal.json
+     */
     public void loadFile() {
         for (Journal journal : journals) {
             addLabel(journal);
         }
     }
+
+    /**
+     * @param journal a journal object
+     * this method is used show the information stored in object
+     */
     public void addLabel(Journal journal) {
         Label label = new Label(journal.getDes());
         label.setFont(Font.font("",FontWeight.BOLD,20));
@@ -127,16 +138,6 @@ public class JournalController {
         System.out.println(week);
         System.out.println("---------------------");
 
-        if(week!=null && sem1.equals(sem)){
-            VBox vBox1 = new VBox(20);
-            vBox1.setMinSize(10, 10);
-            vBox1.setAlignment(Pos.CENTER);
-            Label label1 = new Label("No Record!");
-            label1.setFont(Font.font("",FontWeight.BOLD,20));
-            vBox1.getChildren().add(label1);
-            borderPane.setCenter(vBox1);
-            System.out.println("匹配失败，展示初始页面");
-        }
         if(sem1.equals(sem)&&String.valueOf(week1).equals(week)) {
             VBox vBox = new VBox(20);
             vBox.setMinSize(10, 10);
@@ -146,6 +147,10 @@ public class JournalController {
             System.out.println("匹配成功！");
         }
     }
+
+    /**
+     *The method is used to define action about import journey.
+     */
     protected void onImportButtonClick() {
         JournalImportDialog dialog = new JournalImportDialog();
         dialog.setHeaderText("Please add Journal");
@@ -155,8 +160,6 @@ public class JournalController {
             int week = Integer.parseInt(result[1]);
             String des = result[2];
             String url = result[3];
-
-
 
             ObjectNode childNode = objectMapper.createObjectNode();
             childNode.put("sem", sem);
