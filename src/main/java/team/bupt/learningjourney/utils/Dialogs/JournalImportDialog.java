@@ -33,7 +33,7 @@ public class JournalImportDialog extends Dialog<String[]> {
         grid.add(weekField, 1, 1);
         grid.add(new Label("Description:"), 0, 2);
         grid.add(describeField, 1, 2);
-        grid.add(new Label("Photo Path"), 0, 3);
+        //grid.add(new Label("Photo Path"), 0, 4);
         grid.add(urlField, 1, 3);
 
         Button buttonAddPhoto = new Button("Add photo");
@@ -63,7 +63,7 @@ public class JournalImportDialog extends Dialog<String[]> {
                 });
             }
         });
-        grid.add(buttonAddPhoto,1,4);
+        grid.add(buttonAddPhoto,0,3);
         getDialogPane().setContent(grid);
 
         ButtonType importButtonType = new ButtonType("Import", ButtonBar.ButtonData.OK_DONE);
@@ -79,7 +79,7 @@ public class JournalImportDialog extends Dialog<String[]> {
             return null;
         });
 
-        setWidth(1400);
+        setWidth(1000);
         setHeight(600);
     }
 }

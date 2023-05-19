@@ -3,6 +3,8 @@ package team.bupt.learningjourney.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.util.ISO8601Utils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -25,6 +27,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.Award;
+import team.bupt.learningjourney.utils.Dialogs.AwardsImportDialog;
+import team.bupt.learningjourney.utils.Dialogs.CourseImportDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,10 +82,7 @@ public class AwardsController {
 
         top.setCenter(topCenter);
         top.setBottom(topBottom);
-
-
         borderPane.setTop(top);
-
         Query.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -90,6 +91,29 @@ public class AwardsController {
                 loadFile();
             }
         });
+
+        HBox bottom = new HBox(200);
+        bottom.setPadding(new Insets(40, 0, 40, 0));
+        Button Modify = new Button("Modify");
+        Modify.setTextFill(Color.rgb(84, 188, 189, .7));
+        Modify.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Button Add = new Button("Add");;
+        Add.setTextFill(Color.rgb(84, 188, 189, .7));
+        Add.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Button Delete = new Button("Delete");
+        Delete.setTextFill(Color.rgb(84, 188, 189, .7));
+        Delete.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        bottom.setMinHeight(100);
+        bottom.getChildren().addAll(Modify, Add, Delete);
+        bottom.setAlignment(Pos.CENTER);
+        borderPane.setBottom(bottom);
+        Add.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                onImportButtonClick();
+            }
+        });
+
 
     }
 
@@ -216,11 +240,6 @@ public class AwardsController {
                         new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
                 );
             }
-//            else {
-//                data.add(
-//                      new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
-//                );
-//            }
         }
         table.setItems(data);
 
@@ -235,5 +254,36 @@ public class AwardsController {
         bp.setCenter(vbox);
 
         return this.bp;
+    }
+
+
+    protected void onImportButtonClick() {
+        AwardsImportDialog dialog = new AwardsImportDialog();
+        dialog.setHeaderText("Please fill the Award information");
+        dialog.showAndWait().ifPresent(result -> {
+            String name = result[0];
+            String year = result[1];
+            String kind = result[2];
+            String projectName = result[3];
+            String member = result[4];
+            String award = result[5];
+            double bonus = Double.parseDouble(result[6]);
+
+            ObjectNode childNode = objectMapper.createObjectNode();
+            childNode.put("awardName", name);
+            childNode.put("year", year);
+            childNode.put("kind", kind);
+            childNode.put("projectName",projectName );
+            childNode.put("member",member );
+            childNode.put("award",award );
+            childNode.put("bonus",bonus );
+            ((ArrayNode) rootNode).add(childNode);
+
+            try {
+                objectMapper.writeValue(jsonFile, rootNode);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
