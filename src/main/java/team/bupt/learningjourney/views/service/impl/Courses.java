@@ -28,10 +28,17 @@ import java.io.IOException;
 
 
 /**
- * @author
+ * @author Tianhang Sun
+ * @date 2023/05/19
+ * This class is an overview of whole course page
  */
 public class Courses implements IPageService {
 
+    /**
+     * @param root
+     * @return {@link Node}
+     * This method is for generating a new page
+     */
     @Override
     public Node generatePage(Pane root)  {
 

@@ -28,8 +28,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 
+/**
+ * @author Tianhang Sun
+ * @date 2023/05/19
+ * The CourseCotroller is for adding and showing the content of courses
+ */
 public class CourseController {
     BorderPane bp = new BorderPane();
     //定义的变量
@@ -42,11 +49,22 @@ public class CourseController {
     List<CourseInfo> courses = objectMapper.readValue(jsonFile, new TypeReference<>() {
     });
 
+    /**
+     * @param bp
+     * @throws IOException
+     * The constructor receives the original panel in order to do changes in it
+     */
     //readValue方法，将文件解析并且保存到List里，CoursesTime类就是POJO定义的
     public CourseController(BorderPane bp) throws IOException {
         this.bp = bp;
     }
 
+
+    /**
+     * @return {@link BorderPane}
+     * This methods is for create table to show course contents and
+     * also import courses information
+     */
     public BorderPane loadFile() {
 
         TableView<CourseInfo> table = new TableView<>();
@@ -174,6 +192,10 @@ public class CourseController {
     }
 
 
+    /**
+     * This method is for getting information from customers input and
+     * transfer them into JSONfiles
+     */
     protected void onImportButtonClick() {
         CourseImportDialog dialog = new CourseImportDialog();
         dialog.setHeaderText("Please fill in the course information");
@@ -185,6 +207,18 @@ public class CourseController {
             String property = result[2];
             float credit = Float.parseFloat(result[3]);
             float grade = Float.parseFloat(result[4]);
+
+            for (CourseInfo course : courses) {
+                if (course.getCourseName().equals(result[1])) {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("The course has existed");
+                    alert.showAndWait();
+                    return ;
+                }
+            }
+
 
 
             ObjectNode childNode = objectMapper.createObjectNode();
@@ -205,6 +239,10 @@ public class CourseController {
         });
     }
 
+    /**
+     * @return int
+     * This method is for finding the number of courses in JSON file
+     */
     public int getLength(){
         int count=0;
         for(CourseInfo course:courses){
