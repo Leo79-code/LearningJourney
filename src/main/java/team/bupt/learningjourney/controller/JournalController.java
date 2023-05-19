@@ -28,6 +28,9 @@ import java.util.List;
 import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.Journal;
 import team.bupt.learningjourney.utils.Dialogs.CourseImportDialog;
+import team.bupt.learningjourney.utils.Dialogs.JournalImportDialog;
+
+import static java.lang.reflect.Array.getLength;
 
 public class JournalController {
 
@@ -42,9 +45,9 @@ public class JournalController {
     String week;
     public JournalController(BorderPane borderPane) throws IOException {
     this.borderPane = borderPane;
-    Button button1 = new Button("Check");
-    button1.setTextFill(Color.GRAY);
-    button1.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+    Button buttonCheck = new Button("Check");
+    buttonCheck.setTextFill(Color.GRAY);
+    buttonCheck.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
 
     HBox hBox1 = new HBox(22);
     hBox1.setAlignment(Pos.CENTER);
@@ -59,10 +62,10 @@ public class JournalController {
     top2.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
     ChoiceBox<String> choiceBox2 = new ChoiceBox<String>(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"));
     choiceBox2.setOnAction(e->week=choiceBox2.getSelectionModel().getSelectedItem());
-    hBox1.getChildren().addAll(top1, choiceBox1, top2, choiceBox2, button1);
+    hBox1.getChildren().addAll(top1, choiceBox1, top2, choiceBox2, buttonCheck);
     borderPane.setTop(hBox1);
 
-    button1.setOnAction(new EventHandler<ActionEvent>() {
+        buttonCheck.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent e) {
             System.out.println("sem : "+sem);
@@ -86,41 +89,21 @@ public class JournalController {
         HBox hBox3 = new HBox(20);
         hBox3.setMinHeight(90);
         hBox3.setAlignment(Pos.CENTER);
-        Button button2 = new Button("Delete");
-        button2.setTextFill(Color.GRAY);
-        button2.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        button2.setOnAction(new EventHandler<ActionEvent>() {
+//        Button buttonDelete = new Button("Delete");
+//        buttonDelete.setTextFill(Color.GRAY);
+//        buttonDelete.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        Button buttonAdd = new Button("Append");
+
+        buttonAdd.setTextFill(Color.GRAY);
+        buttonAdd.setFont(Font.font("Verdana", FontWeight.BOLD, 22));
+        buttonAdd.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                CourseImportDialog dialog = new CourseImportDialog();
-                dialog.setHeaderText("Please fill in the journey information");
-                dialog.showAndWait().ifPresent(result -> {
-
-                    String name = result[0];
-                    String week = result[1];
-                    int time = Integer.parseInt(result[2]);
-
-                    ObjectNode childNode = objectMapper.createObjectNode();
-                    childNode.put("semester", name);
-                    childNode.put("week", week);
-                    childNode.put("picture's url", time);
-                    ((ArrayNode) rootNode).add(childNode);
-                    loadFile();
-                });
+                onImportButtonClick();
             }
         });
 
-
-        Button button3 = new Button("Append");
-        button3.setTextFill(Color.GRAY);
-        button3.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        button3.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-            }
-        });
-
-        hBox3.getChildren().addAll(button2, button3);
+        hBox3.getChildren().addAll(buttonAdd);
         borderPane.setBottom(hBox3);
         borderPane.setBackground(Background.fill(Color.LIGHTGREY));
 
@@ -131,7 +114,6 @@ public class JournalController {
             addLabel(journal);
         }
     }
-
     public void addLabel(Journal journal) {
         Label label = new Label(journal.getDes());
         label.setFont(Font.font("",FontWeight.BOLD,20));
@@ -144,7 +126,6 @@ public class JournalController {
         System.out.println(sem);
         System.out.println(week);
         System.out.println("---------------------");
-
 
         if(week!=null && sem1.equals(sem)){
             VBox vBox1 = new VBox(20);
@@ -163,10 +144,34 @@ public class JournalController {
             vBox.getChildren().addAll(imageView,label);
             borderPane.setCenter(vBox);
             System.out.println("匹配成功！");
-
         }
+    }
+    protected void onImportButtonClick() {
+        JournalImportDialog dialog = new JournalImportDialog();
+        dialog.setHeaderText("Please add Journal");
+        dialog.showAndWait().ifPresent(result -> {
+
+            String sem = result[0];
+            int week = Integer.parseInt(result[1]);
+            String des = result[2];
+            String url = result[3];
 
 
+
+            ObjectNode childNode = objectMapper.createObjectNode();
+            childNode.put("sem", sem);
+            childNode.put("week", week);
+            childNode.put("des", des);
+            childNode.put("url",url);
+            loadFile();
+            ((ArrayNode) rootNode).add(childNode);
+            try {
+                objectMapper.writeValue(jsonFile, rootNode);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
     }
 }
 
