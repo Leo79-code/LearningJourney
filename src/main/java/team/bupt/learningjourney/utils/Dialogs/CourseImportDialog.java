@@ -2,14 +2,21 @@ package team.bupt.learningjourney.utils.Dialogs;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 
 /**
- * @author Jian Liu
- * @date 2023/05/17
- *
+ * @author Tianhang Sun
+ * @date 2023/05/19
+ * This class is for creating a new dialog
  */
 public class CourseImportDialog extends Dialog<String[]> {
 
+    /**
+     * No parameter constructor
+     * create a new dialog for input new course information
+     */
     public CourseImportDialog() {
         // 创建对话框的标题
         setTitle("Import New Course");
@@ -25,6 +32,8 @@ public class CourseImportDialog extends Dialog<String[]> {
         TextField propertyField = new TextField();
         TextField creditField = new TextField();
         TextField gradeField = new TextField();
+
+
 
         // 将UI元素添加到GridPane中
         grid.add(new Label("Course Semester:"), 0, 0);
@@ -54,8 +63,54 @@ public class CourseImportDialog extends Dialog<String[]> {
         setResultConverter(dialogButton -> {
             if (dialogButton == importButtonType) {
                 //TODO: 在button中调用Controller类中的load方法
+                boolean isNumeric1 = true;
+                boolean isNumeric2 = true;
+                try {
+                    Float.parseFloat(creditField.getText());
+                } catch (NumberFormatException e) {
+                    isNumeric1 = false;
+                }
+                try {
+                    Float.parseFloat(gradeField.getText());
+                } catch (NumberFormatException e) {
+                    isNumeric2 = false;
+                }
+                if(!isNumeric1){
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Wrong Input,Credit must be a  Number");
+                    alert.showAndWait();
+                    return null;
+                }
+                else if(!isNumeric2){
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Wrong Input, Grade must be a number");
+                    alert.showAndWait();
+                    return null;
+                }
+                else if(Float.parseFloat(creditField.getText())>10.0){
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Wrong Input, Credit must be less than 10.0");
+                    alert.showAndWait();
+                    return null;
+                }
+                else if(Float.parseFloat(gradeField.getText())>100.0){
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Wrong Input, Grade must be less than 100.0");
+                    alert.showAndWait();
+                    return null;
+                }
+                else{
                 String[] result = {semesterField.getText(), nameField.getText(), propertyField.getText(),creditField.getText(),gradeField.getText()};
                 return result;
+                }
             }
             return null;
         });
