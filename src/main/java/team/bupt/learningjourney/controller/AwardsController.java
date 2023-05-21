@@ -3,6 +3,8 @@ package team.bupt.learningjourney.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.util.ISO8601Utils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -25,11 +27,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.Award;
+import team.bupt.learningjourney.utils.Dialogs.AwardsImportDialog;
+import team.bupt.learningjourney.utils.Dialogs.CourseImportDialog;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * @author Jiayi Meng
+ * @date 2023/05/19
+ * This class is used to control the Award UI
+ */
 public class AwardsController {
     BorderPane bp = new BorderPane();
     //定义的变量
@@ -78,25 +86,40 @@ public class AwardsController {
 
         top.setCenter(topCenter);
         top.setBottom(topBottom);
-
-
         borderPane.setTop(top);
-
         Query.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-//                System.out.println("year : "+year);
-//                System.out.println("kind : "+kind);
                 loadFile();
             }
         });
 
+        HBox bottom = new HBox(200);
+        bottom.setPadding(new Insets(40, 0, 40, 0));
+        Button Add = new Button("Add");;
+        Add.setTextFill(Color.rgb(84, 188, 189, .7));
+        Add.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        bottom.setMinHeight(100);
+        bottom.getChildren().addAll(Add);
+        bottom.setAlignment(Pos.CENTER);
+        borderPane.setBottom(bottom);
+        Add.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                onImportButtonClick();
+            }
+        });
+
+
     }
 
+    /**
+     *This method is used to load Awards.json
+     */
     public BorderPane loadFile() {
-        System.out.println("UI data:");
-        System.out.println(year);
-        System.out.println(kind);
+        //System.out.println("UI data:");
+        //System.out.println(year);
+        //System.out.println(kind);
         TableView<Award> table = new TableView<>();
 
         final ObservableList<Award> data = FXCollections.observableArrayList();
@@ -200,27 +223,22 @@ public class AwardsController {
         for (Award award : awards) {
             String jyear = award.getYear();
             String jkind = award.getKind();
-            System.out.println("json：");
-            System.out.println(jyear);
-            System.out.println(jkind);
+            //System.out.println("json：");
+            //System.out.println(jyear);
+            //System.out.println(jkind);
 
             if(year==null&&kind==null) {
-                System.out.println("_________________________________");
+                //System.out.println("_________________________________");
                 data.add(
                         new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
                 );
             }
             if(jyear.equals(year)&&jkind.equals(kind)) {
-                System.out.println("_________________________________");
+                //System.out.println("_________________________________");
                 data.add(
                         new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
                 );
             }
-//            else {
-//                data.add(
-//                      new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
-//                );
-//            }
         }
         table.setItems(data);
 
@@ -235,5 +253,38 @@ public class AwardsController {
         bp.setCenter(vbox);
 
         return this.bp;
+    }
+
+    /**
+     *The method is used to define action about import award.
+     */
+    protected void onImportButtonClick() {
+        AwardsImportDialog dialog = new AwardsImportDialog();
+        dialog.setHeaderText("Please fill the Award information");
+        dialog.showAndWait().ifPresent(result -> {
+            String name = result[0];
+            String year = result[1];
+            String kind = result[2];
+            String projectName = result[3];
+            String member = result[4];
+            String award = result[5];
+            double bonus = Double.parseDouble(result[6]);
+
+            ObjectNode childNode = objectMapper.createObjectNode();
+            childNode.put("awardName", name);
+            childNode.put("year", year);
+            childNode.put("kind", kind);
+            childNode.put("projectName",projectName );
+            childNode.put("member",member );
+            childNode.put("award",award );
+            childNode.put("bonus",bonus );
+            ((ArrayNode) rootNode).add(childNode);
+
+            try {
+                objectMapper.writeValue(jsonFile, rootNode);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }

@@ -16,6 +16,11 @@ import java.util.List;
 import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.CourseInfo;
 
+/**
+ * @author Li Sizhe
+ * @date 2023/05/18
+ * The controller obtain courses info from Courses.json and calculate the performance statistics
+ */
 public class SchoolReportController {
     GridPane grid = new GridPane();
 
@@ -23,17 +28,16 @@ public class SchoolReportController {
         this.grid = grid;
     }
 
-    //定义的变量
     ObjectMapper objectMapper = new ObjectMapper();
-    //Jackson库用于数据绑定的类
     File jsonFile = new File("src/main/resources/json/Courses.json");
-    //json文件
     JsonNode rootNode = objectMapper.readTree(jsonFile);
-    //树模型的json节点
     List<CourseInfo> coursesInfos = objectMapper.readValue(jsonFile, new TypeReference<>() {
     });
 
-    //readValue方法，将文件解析并且保存到List里，CoursesTime类就是POJO定义的
+    /**
+     * @return {@link GridPane}
+     * The method is responsible for calculation and it returns the GridPane to ControllerInitiator
+     */
     public GridPane loadFile() {
         ArrayList<Float> aspList = new ArrayList<>();
         ArrayList<Float> aspCreditList = new ArrayList<>();
@@ -50,9 +54,6 @@ public class SchoolReportController {
             courseInfo.getGrade();
             asList.add(courseInfo.getGrade());
             asCreditList.add(courseInfo.getCredit());
-            //addLabel(courseInfo);
-//这里的 `CoursesTime` 就是全局变量里定义的List，然后遍历这个List，List里的每个元素就是JSON里的
-//一个对象，然后就可以直接用POJO类（coursesTime）的getter读出数据
         }
         int size1 = aspList.size();
         int size2 = asList.size();

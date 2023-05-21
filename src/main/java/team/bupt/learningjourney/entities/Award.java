@@ -1,5 +1,10 @@
 package team.bupt.learningjourney.entities;
 
+/**
+ * @author Jiayi Meng
+ * @date 2023/05/19
+ * define an award object
+ */
 public class Award {
     private String awardName;
     private String year;
