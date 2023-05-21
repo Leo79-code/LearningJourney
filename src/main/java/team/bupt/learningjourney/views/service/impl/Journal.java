@@ -12,6 +12,7 @@ import javafx.scene.Node;
 public class Journal implements IPageService {
     private JournalController journalController;
     public BorderPane borderPane;
+
     @Override
     public Node generatePage(Pane root) {
         borderPane = new BorderPane();

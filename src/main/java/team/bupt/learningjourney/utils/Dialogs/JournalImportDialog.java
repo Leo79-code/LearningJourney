@@ -40,7 +40,7 @@ public class JournalImportDialog extends Dialog<String[]> {
         buttonAddPhoto.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("-----------ADD PHOTO------------");
+                //System.out.println("-----------ADD PHOTO------------");
                 Stage stage = new Stage();
                 FileChooser fc = new FileChooser();
                 final String[] a = {new String()};
@@ -52,11 +52,11 @@ public class JournalImportDialog extends Dialog<String[]> {
                     @Override
                     public void accept(File file) {
                         a[0] = file.getAbsolutePath();
-                        System.out.println(a[0]);
+                        //System.out.println(a[0]);
                         final ImageView imageView = new ImageView(
                                 new Image("file:\\"+a[0],200,200,false,false)
                         );
-                        System.out.println("file:\\"+a[0]);
+                        //System.out.println("file:\\"+a[0]);
                         final String url  = a[0];
                         urlField.setText(a[0]);
                     }

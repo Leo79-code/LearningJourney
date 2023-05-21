@@ -72,8 +72,6 @@ public class JournalController {
         buttonCheck.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent e) {
-            System.out.println("sem : "+sem);
-            System.out.println("week : "+week);
             loadFile();
         }
     });
@@ -81,6 +79,7 @@ public class JournalController {
         Text text3 = new Text("Welcome to My Journey!");
         text3.setFill(Color.ORANGE);
         text3.setFont(Font.font("Verdana", FontWeight.BOLD, 40));
+        text3.setFill(Color.rgb(189, 49, 36));
         VBox vBox2 = new VBox(20);
         vBox2.setMinSize(10, 10);
         Image image = new Image("file:src/main/resources/journey.jpg");
@@ -108,7 +107,7 @@ public class JournalController {
 
         hBox3.getChildren().addAll(buttonAdd);
         borderPane.setBottom(hBox3);
-        borderPane.setBackground(Background.fill(Color.LIGHTGREY));
+        borderPane.setBackground(Background.fill(Color.rgb(242, 202, 42, .7)));
 
     }
 
@@ -131,12 +130,8 @@ public class JournalController {
         String sem1 = journal.getSem();
         int week1 = journal.getWeek();
         String url = journal.getUrl();
-        System.out.println(url);
         Image image = new Image(url);
         ImageView imageView = new ImageView(image);
-        System.out.println(sem);
-        System.out.println(week);
-        System.out.println("---------------------");
 
         if(sem1.equals(sem)&&String.valueOf(week1).equals(week)) {
             VBox vBox = new VBox(20);
@@ -144,7 +139,6 @@ public class JournalController {
             vBox.setAlignment(Pos.CENTER);
             vBox.getChildren().addAll(imageView,label);
             borderPane.setCenter(vBox);
-            System.out.println("匹配成功！");
         }
     }
 

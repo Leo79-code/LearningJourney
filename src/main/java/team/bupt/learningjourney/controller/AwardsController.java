@@ -117,9 +117,9 @@ public class AwardsController {
      *This method is used to load Awards.json
      */
     public BorderPane loadFile() {
-        System.out.println("UI data:");
-        System.out.println(year);
-        System.out.println(kind);
+        //System.out.println("UI data:");
+        //System.out.println(year);
+        //System.out.println(kind);
         TableView<Award> table = new TableView<>();
 
         final ObservableList<Award> data = FXCollections.observableArrayList();
@@ -223,18 +223,18 @@ public class AwardsController {
         for (Award award : awards) {
             String jyear = award.getYear();
             String jkind = award.getKind();
-            System.out.println("json：");
-            System.out.println(jyear);
-            System.out.println(jkind);
+            //System.out.println("json：");
+            //System.out.println(jyear);
+            //System.out.println(jkind);
 
             if(year==null&&kind==null) {
-                System.out.println("_________________________________");
+                //System.out.println("_________________________________");
                 data.add(
                         new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
                 );
             }
             if(jyear.equals(year)&&jkind.equals(kind)) {
-                System.out.println("_________________________________");
+                //System.out.println("_________________________________");
                 data.add(
                         new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
                 );

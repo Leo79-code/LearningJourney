@@ -119,7 +119,7 @@ public class SchoolReport implements IPageService {
             btn.setOnAction(new EventHandler<ActionEvent>() {
 
                 /**
-                 * @param e The parameter refers to the an clicking event
+                 * @param e The parameter refers to the clicking event
                  * The method defines what to happen when clicking the button
                  */
                 @Override
