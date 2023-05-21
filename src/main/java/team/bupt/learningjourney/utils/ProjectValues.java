@@ -2,6 +2,8 @@ package team.bupt.learningjourney.utils;
 
 /**
  * @author Jian Liu
+ * @date 2023/03/25
+ * Some static information used in the project
  */
 public class ProjectValues {
 

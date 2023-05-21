@@ -26,6 +26,8 @@ import static team.bupt.learningjourney.controller.ControllerInitiator.initPageC
 
 /**
  * @author Jian Liu
+ * @date 2023/04/17
+ * The main entrance of JavaFX and the implementation of the main menu
  */
 public class RunApplication extends Application {
 

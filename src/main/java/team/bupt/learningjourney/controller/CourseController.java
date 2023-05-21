@@ -39,26 +39,19 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class CourseController {
     BorderPane bp = new BorderPane();
-    //定义的变量
     ObjectMapper objectMapper = new ObjectMapper();
-    //Jackson库用于数据绑定的类
     File jsonFile = new File("src/main/resources/json/Courses.json");
-    //json文件
     JsonNode rootNode = objectMapper.readTree(jsonFile);
-    //树模型的json节点
     List<CourseInfo> courses = objectMapper.readValue(jsonFile, new TypeReference<>() {
     });
 
     /**
-     * @param bp
-     * @throws IOException
-     * The constructor receives the original panel in order to do changes in it
+     * @param bp Child nodes of the page
+     * @throws IOException The constructor receives the original panel in order to do changes in it
      */
-    //readValue方法，将文件解析并且保存到List里，CoursesTime类就是POJO定义的
     public CourseController(BorderPane bp) throws IOException {
         this.bp = bp;
     }
-
 
     /**
      * @return {@link BorderPane}
@@ -68,8 +61,6 @@ public class CourseController {
     public BorderPane loadFile() {
 
         TableView<CourseInfo> table = new TableView<>();
-
-
 
         final ObservableList<CourseInfo> data = FXCollections.observableArrayList();
 
@@ -168,7 +159,7 @@ public class CourseController {
         final Button ImButton = new Button("Import Data");
         ImButton.setTextFill(Color.rgb(84, 188, 189, .7));
         ImButton.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-        ImButton.setOnAction(e->{
+        ImButton.setOnAction(e -> {
             onImportButtonClick();
         });
 
@@ -194,14 +185,14 @@ public class CourseController {
 
     /**
      * This method is for getting information from customers input and
-     * transfer them into JSONfiles
+     * transfer them into JSON files
      */
     protected void onImportButtonClick() {
         CourseImportDialog dialog = new CourseImportDialog();
         dialog.setHeaderText("Please fill in the course information");
         dialog.showAndWait().ifPresent(result -> {
-            int no1 = getLength()+1;
-            String no =  Integer.toString(no1);
+            int no1 = getLength() + 1;
+            String no = Integer.toString(no1);
             String semester = result[0];
             String name = result[1];
             String property = result[2];
@@ -215,11 +206,9 @@ public class CourseController {
                     alert.setHeaderText(null);
                     alert.setContentText("The course has existed");
                     alert.showAndWait();
-                    return ;
+                    return;
                 }
             }
-
-
 
             ObjectNode childNode = objectMapper.createObjectNode();
             childNode.put("courseNo", no);
@@ -244,15 +233,12 @@ public class CourseController {
      * @return int
      * This method is for finding the number of courses in JSON file
      */
-    public int getLength(){
-        int count=0;
-        for(CourseInfo course:courses){
-          count++;
+    public int getLength() {
+        int count = 0;
+        for (CourseInfo course : courses) {
+            count++;
         }
-        return  count;
+        return count;
     }
-
-
-
 }
 

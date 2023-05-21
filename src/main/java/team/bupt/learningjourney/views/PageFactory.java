@@ -5,6 +5,8 @@ import team.bupt.learningjourney.views.service.impl.*;
 
 /**
  * @author Jian Liu
+ * @date 2023/03/25
+ * Used for handling menu jumps
  */
 public class PageFactory {
     public static IPageService createPageService(String itemName) {

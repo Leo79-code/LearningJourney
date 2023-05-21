@@ -40,7 +40,6 @@ public class TimetableController {
     public TimetableController() throws IOException {
     }
 
-
     /**
      * @param coursesTime A custom POJO class for storing course time information
      * Set each course as a label and add it to the GridPane
@@ -70,7 +69,7 @@ public class TimetableController {
     }
 
     /**
-     *
+     * Listening events of the import button
      */
     @FXML
     protected void onImportButtonClick() {

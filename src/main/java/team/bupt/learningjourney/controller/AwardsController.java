@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.util.ISO8601Utils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,11 +27,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import team.bupt.learningjourney.entities.Award;
 import team.bupt.learningjourney.utils.Dialogs.AwardsImportDialog;
-import team.bupt.learningjourney.utils.Dialogs.CourseImportDialog;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
 /**
  * @author Jiayi Meng
  * @date 2023/05/19
@@ -51,7 +50,7 @@ public class AwardsController {
     });
     String year;
     String kind;
-    //readValue方法，将文件解析并且保存到List里，CoursesTime类就是POJO定义的
+
     public AwardsController(BorderPane borderPane) throws IOException {
         this.bp = borderPane;
         //top design
@@ -72,12 +71,12 @@ public class AwardsController {
         Text Year = new Text("Year: ");
         Year.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
         ChoiceBox<String> choiceBox1 = new ChoiceBox<String>(FXCollections.observableArrayList("2020", "2021", "2022", "2023"));
-        choiceBox1.setOnAction(e->year=choiceBox1.getSelectionModel().getSelectedItem());
+        choiceBox1.setOnAction(e -> year = choiceBox1.getSelectionModel().getSelectedItem());
 
         Text Kind = new Text("Kind: ");
         Kind.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
         ChoiceBox<String> choiceBox2 = new ChoiceBox<String>(FXCollections.observableArrayList("Innovation", "Subject", "Business", "Sports", "Art", "Honorary Title"));
-        choiceBox2.setOnAction(e->kind=choiceBox2.getSelectionModel().getSelectedItem());
+        choiceBox2.setOnAction(e -> kind = choiceBox2.getSelectionModel().getSelectedItem());
         Button Query = new Button("Query");
         Query.setTextFill(Color.rgb(147, 210, 243));
         Query.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
@@ -96,7 +95,8 @@ public class AwardsController {
 
         HBox bottom = new HBox(200);
         bottom.setPadding(new Insets(40, 0, 40, 0));
-        Button Add = new Button("Add");;
+        Button Add = new Button("Add");
+        ;
         Add.setTextFill(Color.rgb(84, 188, 189, .7));
         Add.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         bottom.setMinHeight(100);
@@ -114,7 +114,7 @@ public class AwardsController {
     }
 
     /**
-     *This method is used to load Awards.json
+     * This method is used to load Awards.json
      */
     public BorderPane loadFile() {
         //System.out.println("UI data:");
@@ -211,7 +211,7 @@ public class AwardsController {
                 });
 
         table.setEditable(true);
-        table.getColumns().addAll(awardNameCol, yearCol, kindCol, projectNameCol, memberCol, awardCol,bonusCol);
+        table.getColumns().addAll(awardNameCol, yearCol, kindCol, projectNameCol, memberCol, awardCol, bonusCol);
         awardNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAwardName()));
         yearCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear()));
         kindCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKind()));
@@ -227,13 +227,13 @@ public class AwardsController {
             //System.out.println(jyear);
             //System.out.println(jkind);
 
-            if(year==null&&kind==null) {
+            if (year == null && kind == null) {
                 //System.out.println("_________________________________");
                 data.add(
                         new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
                 );
             }
-            if(jyear.equals(year)&&jkind.equals(kind)) {
+            if (jyear.equals(year) && jkind.equals(kind)) {
                 //System.out.println("_________________________________");
                 data.add(
                         new Award(award.getAwardName(), award.getYear(), award.getKind(), award.getProjectName(), award.getMember(), award.getAward(), award.getBonus())
@@ -256,7 +256,7 @@ public class AwardsController {
     }
 
     /**
-     *The method is used to define action about import award.
+     * The method is used to define action about import award.
      */
     protected void onImportButtonClick() {
         AwardsImportDialog dialog = new AwardsImportDialog();
@@ -274,10 +274,10 @@ public class AwardsController {
             childNode.put("awardName", name);
             childNode.put("year", year);
             childNode.put("kind", kind);
-            childNode.put("projectName",projectName );
-            childNode.put("member",member );
-            childNode.put("award",award );
-            childNode.put("bonus",bonus );
+            childNode.put("projectName", projectName);
+            childNode.put("member", member);
+            childNode.put("award", award);
+            childNode.put("bonus", bonus);
             ((ArrayNode) rootNode).add(childNode);
 
             try {

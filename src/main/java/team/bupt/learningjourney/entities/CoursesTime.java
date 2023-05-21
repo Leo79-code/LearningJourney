@@ -1,5 +1,10 @@
 package team.bupt.learningjourney.entities;
 
+/**
+ * @author Jian Liu
+ * @date 2023/04/04
+ * A custom POJO class for storing course time information
+ */
 public class CoursesTime {
     private String courseName;
     private String weekday;

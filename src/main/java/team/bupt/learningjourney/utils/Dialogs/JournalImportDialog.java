@@ -1,4 +1,5 @@
 package team.bupt.learningjourney.utils.Dialogs;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
@@ -33,30 +34,26 @@ public class JournalImportDialog extends Dialog<String[]> {
         grid.add(weekField, 1, 1);
         grid.add(new Label("Description:"), 0, 2);
         grid.add(describeField, 1, 2);
-        //grid.add(new Label("Photo Path"), 0, 4);
         grid.add(urlField, 1, 3);
 
         Button buttonAddPhoto = new Button("Add photo");
         buttonAddPhoto.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //System.out.println("-----------ADD PHOTO------------");
                 Stage stage = new Stage();
                 FileChooser fc = new FileChooser();
                 final String[] a = {new String()};
                 fc.setTitle("upload files");
-                fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("图片类型","*.jpg","*.png","*.jpeg"));
+                fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Type","*.jpg","*.png","*.jpeg"));
                 fc.setInitialDirectory(new File("D:\\photo"));
                 List<File> list = fc.showOpenMultipleDialog(stage);
                 list.forEach(new Consumer<File>() {
                     @Override
                     public void accept(File file) {
                         a[0] = file.getAbsolutePath();
-                        //System.out.println(a[0]);
                         final ImageView imageView = new ImageView(
                                 new Image("file:\\"+a[0],200,200,false,false)
                         );
-                        //System.out.println("file:\\"+a[0]);
                         final String url  = a[0];
                         urlField.setText(a[0]);
                     }
@@ -72,7 +69,6 @@ public class JournalImportDialog extends Dialog<String[]> {
 
         setResultConverter(dialogButton -> {
             if (dialogButton == importButtonType) {
-                //TODO: 在button中调用Controller类中的load方法
                 String[] result = {semField.getText(), weekField.getText(), describeField.getText(),urlField.getText()};
                 return result;
             }

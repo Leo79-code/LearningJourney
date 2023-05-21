@@ -1,12 +1,12 @@
 package team.bupt.learningjourney.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.*;
 
 /**
@@ -30,15 +30,15 @@ public class JSONToExcelUtil {
             XSSFRow row = null;
             XSSFCell cell = null;
             row = sheet.createRow(0);
-            String[] names = { "courseNo", "semester", "courseName", "property","credit","grade"};
+            String[] names = {"courseNo", "semester", "courseName", "property", "credit", "grade"};
             for (int index = 0; index < 6; index++) {
                 cell = row.createCell(index);
                 cell.setCellValue(names[index]);
             }
             int count = 1;
             JSONArray dataArray = JSONArray.parseArray(json);
-            for(int i = 0; i < dataArray.size();i++){
-                JSONObject dataObj =  dataArray.getJSONObject(i);
+            for (int i = 0; i < dataArray.size(); i++) {
+                JSONObject dataObj = dataArray.getJSONObject(i);
                 String courseNo = dataObj.getString("courseNo");
                 String semester = dataObj.getString("semester");
                 String courseName = dataObj.getString("courseName");
@@ -76,7 +76,6 @@ public class JSONToExcelUtil {
 
     }
 
-
     /**
      * @param fileName The name of Json file
      * @return {@link String} The content of Json
@@ -86,7 +85,7 @@ public class JSONToExcelUtil {
         try {
             File jsonFile = new File(fileName);
             FileReader fileReader = new FileReader(jsonFile);
-            Reader reader = new InputStreamReader(new FileInputStream(jsonFile),"utf-8");
+            Reader reader = new InputStreamReader(new FileInputStream(jsonFile), "utf-8");
             int ch = 0;
             StringBuffer sb = new StringBuffer();
             while ((ch = reader.read()) != -1) {
@@ -102,5 +101,3 @@ public class JSONToExcelUtil {
         }
     }
 }
-
-

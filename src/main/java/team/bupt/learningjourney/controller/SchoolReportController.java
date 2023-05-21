@@ -1,13 +1,13 @@
 package team.bupt.learningjourney.controller;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class SchoolReportController {
 
     /**
      * @return {@link GridPane}
-     * The method is responsible for calculation and it returns the GridPane to ControllerInitiator
+     * The method is responsible for calculation, and it returns the GridPane to ControllerInitiator
      */
     public GridPane loadFile() {
         ArrayList<Float> aspList = new ArrayList<>();
@@ -71,36 +71,36 @@ public class SchoolReportController {
         for (int i = 0; i < size2; i++) {
             addGrade2 += asList.get(i);
         }
-        asp = (float)addGrade1 / addCredit1;
-        as = (float)addGrade2 / size2;
+        asp = (float) addGrade1 / addCredit1;
+        as = (float) addGrade2 / size2;
         gpa = (asp / 100) * 4.0;
 
         //Range 70 ~ 95
-        if(as > 95.0){
+        if (as > 95.0) {
             perc = 0.01 * 100;
         } else if (as < 70.0) {
             perc = 0.80 * 100;
-        }else{
+        } else {
             perc = ((95 - asp) / 60.0) * 100;
         }
 
 
-        Text avg_val = new Text(String.format("%.2f",asp));
+        Text avg_val = new Text(String.format("%.2f", asp));
         avg_val.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         avg_val.setFill(Color.BLUEVIOLET);
         grid.add(avg_val, 3, 4);
 
-        Text gpa_val = new Text(String.format("%.2f",gpa));
+        Text gpa_val = new Text(String.format("%.2f", gpa));
         gpa_val.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         gpa_val.setFill(Color.BLUEVIOLET);
         grid.add(gpa_val, 3, 6);
 
-        Text total_avg_val = new Text(String.format("%.2f",as));
+        Text total_avg_val = new Text(String.format("%.2f", as));
         total_avg_val.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         total_avg_val.setFill(Color.BLUEVIOLET);
         grid.add(total_avg_val, 3, 8);
 
-        Text quoEstim_val = new Text(String.format("%.2f",perc) + " %");
+        Text quoEstim_val = new Text(String.format("%.2f", perc) + " %");
         quoEstim_val.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
         quoEstim_val.setFill(Color.BLUEVIOLET);
         grid.add(quoEstim_val, 3, 10);
@@ -108,4 +108,3 @@ public class SchoolReportController {
         return this.grid;
     }
 }
-

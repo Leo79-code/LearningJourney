@@ -1,9 +1,9 @@
 package team.bupt.learningjourney.utils;
 
 /**
- * Data Utilities Classes
- *
  * @author Jian Liu
+ * @date 2023/03/25
+ * Data Utilities Classes
  */
 public class DataUtil {
 

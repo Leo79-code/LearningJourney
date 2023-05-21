@@ -15,9 +15,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 /**
- * Style Utilities Classes
- *
  * @author Jian Liu
+ * @date 2023/03/25
+ * Style Utilities Classes
  */
 public class StyleUtil {
 

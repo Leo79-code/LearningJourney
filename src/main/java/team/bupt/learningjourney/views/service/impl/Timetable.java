@@ -1,16 +1,18 @@
 package team.bupt.learningjourney.views.service.impl;
 
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import team.bupt.learningjourney.views.service.IPageService;
-
 import java.io.IOException;
+
+import team.bupt.learningjourney.views.service.IPageService;
 
 /**
  * @author Liu Jian
+ * @date 2023/03/27
+ * Load FXML pages and return page nodes
+ *
  */
 public class Timetable implements IPageService {
 

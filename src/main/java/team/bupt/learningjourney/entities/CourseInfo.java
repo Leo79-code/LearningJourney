@@ -1,7 +1,5 @@
 package team.bupt.learningjourney.entities;
 
-import javafx.beans.property.SimpleStringProperty;
-
 /**
  * @author Tianhang Sun
  * @date 2023/05/19
@@ -28,8 +26,7 @@ public class CourseInfo {
      * @param courseName
      * @param property
      * @param credit
-     * @param grade
-     * Assigning values
+     * @param grade      Assigning values
      */
     public CourseInfo(String courseNo, String semester, String courseName, String property, float credit, float grade) {
         this.courseNo = courseNo;
@@ -52,8 +49,7 @@ public class CourseInfo {
     }
 
     /**
-     * @param courseNo
-     * Setter: set courseNo value
+     * @param courseNo Setter: set courseNo value
      */
     public void setCourseNo(String courseNo) {
         this.courseNo = courseNo;
@@ -68,8 +64,7 @@ public class CourseInfo {
     }
 
     /**
-     * @param semester
-     * Setter: set semester value
+     * @param semester Setter: set semester value
      */
     public void setSemester(String semester) {
         this.semester = semester;
@@ -84,8 +79,7 @@ public class CourseInfo {
     }
 
     /**
-     * @param courseName
-     * Setter: set course name value
+     * @param courseName Setter: set course name value
      */
     public void setCourseName(String courseName) {
         this.courseName = courseName;
@@ -100,8 +94,7 @@ public class CourseInfo {
     }
 
     /**
-     * @param property
-     * Setter: set course property value
+     * @param property Setter: set course property value
      */
     public void setProperty(String property) {
         this.property = property;
@@ -116,8 +109,7 @@ public class CourseInfo {
     }
 
     /**
-     * @param credit
-     * Setter: set course credit value
+     * @param credit Setter: set course credit value
      */
     public void setCredit(float credit) {
         this.credit = credit;
@@ -132,8 +124,7 @@ public class CourseInfo {
     }
 
     /**
-     * @param grade
-     * Setter: set course grade value
+     * @param grade Setter: set course grade value
      */
     public void setGrade(float grade) {
         this.grade = grade;
