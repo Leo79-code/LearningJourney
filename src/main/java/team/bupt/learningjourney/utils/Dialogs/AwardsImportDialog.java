@@ -16,12 +16,26 @@ public class AwardsImportDialog extends Dialog<String[]> {
         grid.setVgap(10);
 
         TextField nameField = new TextField();
+        nameField.setId("nameField");
+
         TextField yearField = new TextField();
+        yearField.setId("yearField");
+
         TextField kindField = new TextField();
+        kindField.setId("kindField");
+
         TextField projectField = new TextField();
+        projectField.setId("projectField");
+
         TextField memberField = new TextField();
+        memberField.setId("memberField");
+
         TextField awardField = new TextField();
+        awardField.setId("awardField");
+
         TextField bonusField = new TextField();
+        bonusField.setId("bonusField");
+
 
         grid.add(new Label("Award Name:"), 0, 0);
         grid.add(nameField, 1, 0);
@@ -52,7 +66,6 @@ public class AwardsImportDialog extends Dialog<String[]> {
 
         setResultConverter(dialogButton -> {
             if (dialogButton == importButtonType) {
-                //TODO: 在button中调用Controller类中的load方法
                 String[] result = {nameField.getText(), yearField.getText(), kindField.getText(),projectField.getText(),memberField.getText(),awardField.getText(),bonusField.getText()};
                 return result;
             }

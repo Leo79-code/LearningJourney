@@ -13,7 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import team.bupt.learningjourney.entities.CoursesTime;
-import team.bupt.learningjourney.utils.Dialogs.CourseImportDialog;
+import team.bupt.learningjourney.utils.Dialogs.TimetableImportDialog;
 
 
 import java.io.File;
@@ -73,7 +73,7 @@ public class TimetableController {
      */
     @FXML
     protected void onImportButtonClick() {
-        CourseImportDialog dialog = new CourseImportDialog();
+        TimetableImportDialog dialog = new TimetableImportDialog();
         dialog.setHeaderText("Please fill in the course information");
         dialog.showAndWait().ifPresent(result -> {
             String name = result[0];

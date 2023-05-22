@@ -25,9 +25,17 @@ public class JournalImportDialog extends Dialog<String[]> {
         grid.setHgap(10);
         grid.setVgap(10);
         TextField semField = new TextField();
+        semField.setId("semField");
+
         TextField weekField = new TextField();
+        weekField.setId("weekField");
+
         TextField describeField = new TextField();
+        describeField.setId("describeField");
+
         TextField urlField = new TextField();
+        urlField.setId("urlField");
+
         grid.add(new Label("Semester:"), 0, 0);
         grid.add(semField, 1, 0);
         grid.add(new Label("Week:"), 0, 1);

@@ -24,10 +24,20 @@ public class CourseImportDialog extends Dialog<String[]> {
         grid.setVgap(10);
 
         TextField semesterField = new TextField();
+        semesterField.setId("semesterField");
+
         TextField nameField = new TextField();
+        nameField.setId("nameField");
+
         TextField propertyField = new TextField();
+        propertyField.setId("propertyField");
+
         TextField creditField = new TextField();
+        creditField.setId("creditField");
+
         TextField gradeField = new TextField();
+        gradeField.setId("gradeField");
+
 
         grid.add(new Label("Course Semester:"), 0, 0);
         grid.add(semesterField, 1, 0);
@@ -52,7 +62,6 @@ public class CourseImportDialog extends Dialog<String[]> {
 
         setResultConverter(dialogButton -> {
             if (dialogButton == importButtonType) {
-                //TODO: 在button中调用Controller类中的load方法
                 boolean isNumeric1 = true;
                 boolean isNumeric2 = true;
                 try {
@@ -65,41 +74,37 @@ public class CourseImportDialog extends Dialog<String[]> {
                 } catch (NumberFormatException e) {
                     isNumeric2 = false;
                 }
-                if(!isNumeric1){
+                if (!isNumeric1) {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
                     alert.setContentText("Wrong Input,Credit must be a  Number");
                     alert.showAndWait();
                     return null;
-                }
-                else if(!isNumeric2){
+                } else if (!isNumeric2) {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
                     alert.setContentText("Wrong Input, Grade must be a number");
                     alert.showAndWait();
                     return null;
-                }
-                else if(Float.parseFloat(creditField.getText())>10.0){
+                } else if (Float.parseFloat(creditField.getText()) > 10.0) {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
                     alert.setContentText("Wrong Input, Credit must be less than 10.0");
                     alert.showAndWait();
                     return null;
-                }
-                else if(Float.parseFloat(gradeField.getText())>100.0){
+                } else if (Float.parseFloat(gradeField.getText()) > 100.0) {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
                     alert.setContentText("Wrong Input, Grade must be less than 100.0");
                     alert.showAndWait();
                     return null;
-                }
-                else{
-                String[] result = {semesterField.getText(), nameField.getText(), propertyField.getText(),creditField.getText(),gradeField.getText()};
-                return result;
+                } else {
+                    String[] result = {semesterField.getText(), nameField.getText(), propertyField.getText(), creditField.getText(), gradeField.getText()};
+                    return result;
                 }
             }
             return null;
