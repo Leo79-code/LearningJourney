@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <Label text="Learning Journey" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="Calibri Light Italic" size="70.0" />
+            </font>
+            <padding>
+                <Insets top="34.0" />
+            </padding>
+        </Label>
+    </top>
+   <center>
+   </center>
+   <center>
+      <ImageView fitHeight="588.0" fitWidth="951.0" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../welcome.png" />
+         </image>
+      </ImageView>
+   </center>
+</BorderPane>
